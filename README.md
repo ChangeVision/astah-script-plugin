@@ -20,15 +20,15 @@ How to install
 ------------
 1. Deploy the jar file you downloaded from [Astah Script Plugin](https://github.com/ChangeVision/astah-script-plugin/downloads), in the **"plugins"** folder...
 
-    * e.g.) for Professional edition
-      * `$USER_HOME/.astah/professional/plugins/`
-      * `/Applications/astah professional/plguins/`
-      * `C:Å_Program FilesÅ_astah-professionalÅ_pluginsÅ_`
+    e.g.) for Professional edition: 
+    `$USER_HOME/.astah/professional/plugins/`
+    `/Applications/astah professional/plguins/`
+    `C:\Program Files\astah-professional\plugins\`
     
-    * e.g.) for Community edition
-      * `$USER_HOME/.astah/community/plugins/`
-      * `/Applications/astah community/plguins/`
-      * `C:Å_Program FilesÅ_astah-communityÅ_pluginsÅ_`
+    e.g.) for Community edition: 
+    `$USER_HOME/.astah/community/plugins/`
+    `/Applications/astah community/plguins/`
+    `C:\Program Files\astah-community\plugins\`
 
 2. Start Astah
 
@@ -46,16 +46,16 @@ for(var i in classes) {
     println(classes[i].getName());
 }
 ```
- * Other examples are in the 'sample_scripts' directory.
+ * Other examples are in the `sample_scripts` directory.
  * You can use the following predefined variables in your script.
-   * 'projectAccessor'
+   * `projectAccessor`
      * It's an object of ProjectAccessor in Astah API.
-     * 'null' if Astah has no project.
-   * 'astah'
-     * It's same as 'projectAccessor'.
-   * 'astahWindow'
+     * `null` if Astah has no project.
+   * `astah`
+     * It's same as `projectAccessor`.
+   * `astahWindow`
      * It's the main window object of Astah.
-   * 'scriptWindow'
+   * `scriptWindow`
      * It's the window object of the script plugin.
  * You are able to use the Astah API in your script.
    * Astah API
