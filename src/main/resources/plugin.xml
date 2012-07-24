@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <extension point="com.change_vision.astah.ui.actionSets">
+        <actionSet
+         label="Actions for Script"
+         visible="true"
+         id="com.change_vision.astah.extension.plugin.script.actionSet">
+            <action
+             label="%show_script_view_action_label"
+             class="com.change_vision.astah.extension.plugin.script.ShowScriptViewAction"
+             tooltip="%show_script_view_action_tooltip"
+             menubarPath="tool/export_image"
+             id="com.change_vision.astah.extension.plugin.script.ShowScriptViewAction">
+            </action>
+        </actionSet>
+    </extension>
+</plugin>
