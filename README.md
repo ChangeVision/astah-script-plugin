@@ -1,6 +1,6 @@
 Astah Script Plugin
 =============================
-![dialog image](https://github.com/ChangeVision/astar-script-plugin/raw/master/doc/screeenshots/script_dialog.png)
+![dialog image](https://github.com/ChangeVision/astah-script-plugin/raw/master/doc/screenshots/script_dialog.png)
 
 Version
 ------------
@@ -20,21 +20,21 @@ How to install
 ------------
 1. Deploy the jar file you downloaded from [Astah Script Plugin](https://github.com/ChangeVision/astah-script-plugin/downloads), in the **"plugins"** folder...
 
-    e.g.) for Professional edition
-    `$USER_HOME/.astah/professional/plugins/`
-    `/Applications/astah professional/plguins/`
-    `C:Å_Program FilesÅ_astah-professionalÅ_pluginsÅ_`
+    * e.g.) for Professional edition
+      * `$USER_HOME/.astah/professional/plugins/`
+      * `/Applications/astah professional/plguins/`
+      * `C:Å_Program FilesÅ_astah-professionalÅ_pluginsÅ_`
     
-    e.g.) for Community edition
-    `$USER_HOME/.astah/community/plugins/`
-    `/Applications/astah community/plguins/`
-    `C:Å_Program FilesÅ_astah-communityÅ_pluginsÅ_`
+    * e.g.) for Community edition
+      * `$USER_HOME/.astah/community/plugins/`
+      * `/Applications/astah community/plguins/`
+      * `C:Å_Program FilesÅ_astah-communityÅ_pluginsÅ_`
 
 2. Start Astah
 
 3. You find that the [Script...] has been added under the [Tool] menu (Below the [Export Image])
 
-![menu image](https://github.com/ChangeVision/astar-script-plugin/raw/master/doc/screeenshots/script_menu.png)
+![menu image](https://github.com/ChangeVision/astah-script-plugin/raw/master/doc/screenshots/script_menu.png)
 
 Script example
 ------------
