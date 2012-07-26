@@ -10,6 +10,7 @@ Available for
 ------------
 Astah Community, UML, and Professional 6.5.x or later.
 Some sample scripts are available only for Astah UML and Professional.
+Astah: http://astah.net/
 
 Description
 ------------
@@ -23,12 +24,12 @@ How to install
     * e.g.) for Professional edition
       * `$USER_HOME/.astah/professional/plugins/`
       * `/Applications/astah professional/plguins/`
-      * `C:_Program Files_astah-professional_plugins_`
+      * `C:ï¿½_Program Filesï¿½_astah-professionalï¿½_pluginsï¿½_`
     
     * e.g.) for Community edition
       * `$USER_HOME/.astah/community/plugins/`
       * `/Applications/astah community/plguins/`
-      * `C:_Program Files_astah-community_plugins_`
+      * `C:ï¿½_Program Filesï¿½_astah-communityï¿½_pluginsï¿½_`
 
 2. Start Astah
 
