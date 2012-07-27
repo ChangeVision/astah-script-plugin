@@ -10,6 +10,7 @@ Available for
 ------------
 Astah Community, UML, and Professional 6.5.x or later.
 Some sample scripts are available only for Astah UML and Professional.
+Astah: http://astah.net/
 
 Description
 ------------
