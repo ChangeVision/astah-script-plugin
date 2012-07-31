@@ -79,7 +79,7 @@ How to build
 
 How to use other script languages
 ------------
-You are able to use other script langueges which support OSGi JSR223(experimental).
+You are able to use other script languages which support OSGi JSR223(experimental).
 
 1. Download jar file for other script languages(ex. groovy-all.jar, jruby-###.jar).
 2. Copy the jar file to the Astah plugins folder(<user-home>/.astah/<Astah-edition>/plugins).
