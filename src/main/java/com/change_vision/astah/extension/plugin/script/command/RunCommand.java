@@ -3,6 +3,7 @@ package com.change_vision.astah.extension.plugin.script.command;
 import java.awt.Cursor;
 import java.util.Date;
 
+import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import javax.swing.text.BadLocationException;
@@ -66,7 +67,13 @@ public class RunCommand {
                 //e.printStackTrace();
             }
             System.err.println("ERROR: line = " + ex.getLineNumber() + ", column = " + ex.getColumnNumber());
-            System.err.println(ex.toString());
+            String errorMessage = ex.getLocalizedMessage();
+             
+            errorMessage = errorMessage.replaceFirst("javax.script.ScriptException: ", "");
+            errorMessage = errorMessage.replaceFirst("sun.org.mozilla.javascript.internal.EcmaError: ", "");
+            System.err.println(errorMessage);
         }
+        scEngine.getBindings(ScriptContext.GLOBAL_SCOPE).clear();
+        scEngine.getBindings(ScriptContext.ENGINE_SCOPE).clear();
     }
 }
