@@ -69,6 +69,11 @@ public class ScriptViewContext {
     }
 
     private void onModifiedByOtherTool() {
+        if (!dialog.isVisible()) {
+            //It is better to notify it later. But it is not implemented it yet.
+            return;
+        }
+        
         int result = JOptionPane.showConfirmDialog(dialog,
                 Messages.getMessage("message.ask_on_modified_by_other_tool"));
         if (result == JOptionPane.YES_OPTION) {
