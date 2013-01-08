@@ -1,27 +1,23 @@
 package com.change_vision.astah.extension.plugin.script.command;
 
 import java.awt.Cursor;
-import java.awt.FileDialog;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import com.change_vision.astah.extension.plugin.script.ScriptViewContext;
+import com.change_vision.astah.extension.plugin.script.util.FileChooser;
 import com.change_vision.astah.extension.plugin.script.util.Messages;
 
 public class SaveCommand {
     public static void execute(ScriptViewContext context) {
         if (context.currentFile == null) {
-            FileDialog fileDialog = new FileDialog(context.dialog,
-                    Messages.getMessage("save_dialog.title"), FileDialog.SAVE);
-            fileDialog.setVisible(true);
-            String selectedFile = fileDialog.getFile();
-            if (selectedFile != null) {
-                String fileName = fileDialog.getDirectory() + selectedFile;
-                File file = new File(fileName);
-                context.setCurrentFile(file);
-            } else {
+            String filePath = FileChooser.chooseFileToSave(context.dialog);
+            if (filePath == null) {
                 return;
+            } else {
+                File file = new File(filePath);
+                context.setCurrentFile(file);
             }
         }
 

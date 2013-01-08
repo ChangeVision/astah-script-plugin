@@ -1,7 +1,6 @@
 package com.change_vision.astah.extension.plugin.script.command;
 
 import java.awt.Cursor;
-import java.awt.FileDialog;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,6 +11,7 @@ import javax.script.ScriptEngine;
 import javax.swing.JOptionPane;
 
 import com.change_vision.astah.extension.plugin.script.ScriptViewContext;
+import com.change_vision.astah.extension.plugin.script.util.FileChooser;
 import com.change_vision.astah.extension.plugin.script.util.Messages;
 
 public class OpenCommand {
@@ -31,18 +31,13 @@ public class OpenCommand {
         }
 
         if (filePath == null) {
-            FileDialog fileDialog = new FileDialog(context.dialog,
-                    Messages.getMessage("open_script_dialog.title"), FileDialog.LOAD);
-            fileDialog.setVisible(true);
-            String selectedFile = fileDialog.getFile();
-            if (selectedFile == null) {
+            filePath = FileChooser.chooseFileToLoad(context.dialog);
+            if (filePath == null) {
                 return;
             }
 
             context.setIsModified(false);
             NewCommand.execute(context); // Close current script file
-
-            filePath = fileDialog.getDirectory() + selectedFile;
         }
         File f = new File(filePath);
         context.dialog.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
