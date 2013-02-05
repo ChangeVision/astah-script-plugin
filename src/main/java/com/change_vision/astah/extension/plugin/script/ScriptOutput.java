@@ -43,6 +43,10 @@ public class ScriptOutput extends JTextPane {
         System.setOut(originalOut);
         System.setErr(originalErr);
     }
+    
+    public void clear() {
+        setText("");
+    }
 
     private class OutputStreamExtension extends ByteArrayOutputStream {
         private SimpleAttributeSet attr;

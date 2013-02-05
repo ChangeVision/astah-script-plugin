@@ -39,6 +39,7 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import org.fife.ui.rtextarea.RecordableTextAction;
 
 import com.change_vision.astah.extension.plugin.script.command.BrowseCommand;
+import com.change_vision.astah.extension.plugin.script.command.ClearOutputCommand;
 import com.change_vision.astah.extension.plugin.script.command.CloseCommand;
 import com.change_vision.astah.extension.plugin.script.command.NewCommand;
 import com.change_vision.astah.extension.plugin.script.command.OpenCommand;
@@ -138,9 +139,32 @@ public class ScriptView {
 
         // Output Text
         context.scriptOutput = new ScriptOutput();
-        JScrollPane outputPane = new JScrollPane(context.scriptOutput);
+        JPanel outputPane = new JPanel();
+        outputPane.setLayout(new BorderLayout());
+        
+        /*
+        JToolBar outputToolBar = new JToolBar();
+        outputToolBar.setFloatable(false);
+        outputToolBar.setFocusable(false);
+
+        JButton clearButton = new JButton(getIcon("images/clear_console.png"));
+        //outputToolBar.add(Box.createGlue());
+        outputToolBar.add(clearButton);
+        clearButton.setToolTipText(Messages.getMessage("action.clear_console.tooltip"));
+        clearButton.setRequestFocusEnabled(false);
+        clearButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ClearOutputCommand.execute(context);
+            }
+        });
+
+        outputPane.add("East", outputToolBar);
+        */
+        
+        outputPane.add("Center", new JScrollPane(context.scriptOutput));
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+        splitPane.setOneTouchExpandable(true);
         splitPane.setTopComponent(scriptPane);
         splitPane.setBottomComponent(outputPane);
 
@@ -315,7 +339,19 @@ public class ScriptView {
                 RunCommand.execute(context);
             }
         });
-
+        
+        actionMenu.addSeparator();
+        
+        actionMenu.add(item = new JMenuItem(Messages.getMessage("action.clear_console.label"),
+                getIcon("images/clear_console.png")));
+        item.setMnemonic(KeyEvent.VK_C);
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, shortcutKeyMask));
+        item.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ClearOutputCommand.execute(context);
+            }
+        });
+        
         menuBar.add(actionMenu);
 
         JMenu helpMenu = new JMenu(Messages.getMessage("help_menu.label"));
