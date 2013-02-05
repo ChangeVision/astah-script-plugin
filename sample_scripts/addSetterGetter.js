@@ -28,7 +28,7 @@ function getSelectedAttributesInProjectView() {
         var entity = selectedEntities[i];
         if (entity instanceof IAttribute) {
             attributes.push(entity);
-            println('HIT: ' + entity.getName());
+            println('Target attribute: ' + entity.getName());
         }
     }
 
@@ -42,8 +42,10 @@ function addSetterGetter(attribute) {
     //setter
     var setter = editor.createOperation(clazz, getSetterName(attributeName), 'void');
     editor.createParameter(setter, attribute.getName(), attribute.getType());
+    println('Added Setter Operation: ' + setter.getName());
     //getter
     var getter = editor.createOperation(clazz, getGetterName(attributeName), attribute.getType());
+    println('Added Getter Operation: ' + getter.getName());
 }
 
 function getSetterName(attributeName) {
