@@ -4,12 +4,12 @@ Astah Script Plugin
 
 バージョン
 ------------
-0.9.0
+1.0.0
 
 対象エディション
 ------------------
-Astah Community, UML, and Professional 6.5.x 以降  
-サンプルスクリプトの一部は、Astah UML、Astah Professionalのみで利用可能。  
+Astah Community, UML, and Professional 6.5.x 以降
+サンプルスクリプトの一部は、Astah UML、Astah Professionalのみで利用可能。
 Astah: http://astah.change-vision.com/ja/
 
 概要
@@ -46,24 +46,28 @@ Astah: http://astah.change-vision.com/ja/
 
 サンプルスクリプト
 ---------------------
-`sample_scripts` ディレクトリ（フォルダ）には、合計10ケのJavaScriptサンプルファイルが格納されています。
+`sample_scripts` フォルダには、合計15ケのJavaScriptサンプルファイルが格納されています。
 
-* addStereotypeToSelectedModel.js
-* checkEdition.js
-* countClasses.js
-* createAndOpenDiagram.js
-* exportCsv.js
-* printClasses.js
-* printMindmapTopics.js
-* printPackageAndClassInfo.js
-* searchAndEdit.js
-* useJavaGUI.js
-
+ * addSetterGetter.js
+ * addStereotypeToSelectedModel.js
+ * checkEdition.js
+ * countClasses.js
+ * createAndOpenDiagram.js
+ * createEREntities.js
+ * expandAllTopics.js
+ * exportCsv.js
+ * printClasses.js
+ * printERIndex.js
+ * printMindmapTopics.js
+ * printPackageAndClassInfo.js
+ * printPresentationProperties.js
+ * searchAndEdit.js
+ * useJavaGUI.js
 
 例) JavaScript: `printClasses.js`
 ```javascript
 importPackage(com.change_vision.jude.api.inf.model);
-classes = astah.findElements(IClass);
+var classes = astah.findElements(IClass);
 for(var i in classes) {
     println(classes[i].getName());
 }
