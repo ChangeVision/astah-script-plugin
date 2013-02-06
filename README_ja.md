@@ -46,7 +46,7 @@ Astah: http://astah.change-vision.com/ja/
 
 サンプルスクリプト
 ---------------------
-`sample_scripts` フォルダには、合計15ケのJavaScriptサンプルファイルが格納されています。
+`sample_scripts` フォルダには、合計14ケのJavaScriptサンプルファイルが格納されています。
 
  * addSetterGetter.js
  * addStereotypeToSelectedModel.js
@@ -54,7 +54,6 @@ Astah: http://astah.change-vision.com/ja/
  * countClasses.js
  * createAndOpenDiagram.js
  * createEREntities.js
- * expandAllTopics.js
  * exportCsv.js
  * printClasses.js
  * printERIndex.js

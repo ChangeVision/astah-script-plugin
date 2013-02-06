@@ -24,12 +24,12 @@ How to install
     e.g.) for Professional edition: 
     `$USER_HOME/.astah/professional/plugins/`
     `/Applications/astah professional/plguins/`
-    `C:\Program Files\astah-professional\plugins\`
+    `C:¥Program Files¥astah-professional¥plugins¥`
     
     e.g.) for Community edition: 
     `$USER_HOME/.astah/community/plugins/`
     `/Applications/astah community/plguins/`
-    `C:\Program Files\astah-community\plugins\`
+    `C:¥Program Files¥astah-community¥plugins¥`
 
 2. Start Astah
 
