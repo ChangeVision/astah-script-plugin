@@ -2,51 +2,51 @@ Astah Script Plugin
 =============================
 ![dialog image](https://github.com/ChangeVision/astah-script-plugin/raw/master/doc/screenshots/script_dialog_ja.png)
 
-ƒo[ƒWƒ‡ƒ“
+ãƒãƒ¼ã‚¸ãƒ§ãƒ³
 ------------
 1.0.0
 
-‘ÎÛƒGƒfƒBƒVƒ‡ƒ“
+å¯¾è±¡ã‚¨ãƒ‡ã‚£ã‚·ãƒ§ãƒ³
 ------------------
-Astah Community, UML, and Professional 6.5.x ˆÈ~
-ƒTƒ“ƒvƒ‹ƒXƒNƒŠƒvƒg‚Ìˆê•”‚ÍAAstah UMLAAstah Professional‚Ì‚İ‚Å—˜—p‰Â”\B
+Astah Community, UML, and Professional 6.5.x ä»¥é™
+ã‚µãƒ³ãƒ—ãƒ«ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®ä¸€éƒ¨ã¯ã€Astah UMLã€Astah Professionalã®ã¿ã§åˆ©ç”¨å¯èƒ½ã€‚
 Astah: http://astah.change-vision.com/ja/
 
-ŠT—v
+æ¦‚è¦
 ------------
-ƒXƒNƒŠƒvƒgŒ¾Œê‚ÅAstah‚ÉƒAƒNƒZƒX‚Å‚«‚Ü‚·BECMAScript(JavaScript)‚Ì•ÒW‚ÆÀs‚ª‰Â”\‚Å‚·B
+ã‚¹ã‚¯ãƒªãƒ—ãƒˆè¨€èªã§Astahã«ã‚¢ã‚¯ã‚»ã‚¹ã§ãã¾ã™ã€‚ECMAScript(JavaScript)ã®ç·¨é›†ã¨å®Ÿè¡ŒãŒå¯èƒ½ã§ã™ã€‚
 
-ƒCƒ“ƒXƒg[ƒ‹‚Ì—¬‚ê
+ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã®æµã‚Œ
 ------------
-1. [Download](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.0.html)‚©‚ç zipƒtƒ@ƒCƒ‹‚ğƒ_ƒEƒ“ƒ[ƒh‚µA”CˆÓ‚ÌƒtƒHƒ‹ƒ_‚Ö“WŠJ‚µ‚Ü‚·B
+1. [Download](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.0.html)ã‹ã‚‰ zipãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ã€ä»»æ„ã®ãƒ•ã‚©ãƒ«ãƒ€ã¸å±•é–‹ã—ã¾ã™ã€‚
 
-    —á) Astah Professional, Windows: `$USER_HOME/.astah/professional/plugins/`,  `C:\Program Files\astah-professional\plugins\`
+    ä¾‹) Astah Professional, Windows: `$USER_HOME/.astah/professional/plugins/`,  `C:Â¥Program FilesÂ¥astah-professionalÂ¥pluginsÂ¥`
     Astah Professional, Mac OS X: `/Applications/astah professional/plguins/`
     
-    —á) Astah Community, Windows: `$USER_HOME/.astah/community/plugins/`, `C:\Program Files\astah-community\plugins\`
+    ä¾‹) Astah Community, Windows: `$USER_HOME/.astah/community/plugins/`, `C:Â¥Program FilesÂ¥astah-communityÂ¥pluginsÂ¥`
     Astah Community, Mac OS X: `/Applications/astah community/plguins/`
 
-2. Astah‚ğ‹N“®‚µ‚Ü‚·B
+2. Astahã‚’èµ·å‹•ã—ã¾ã™ã€‚
 
-3. ã•”ƒƒjƒ…[[ƒc[ƒ‹]”z‰º‚É [ƒXƒNƒŠƒvƒg]‚ª’Ç‰Á‚³‚ê‚Ä‚¢‚Ü‚·B
+3. ä¸Šéƒ¨ãƒ¡ãƒ‹ãƒ¥ãƒ¼[ãƒ„ãƒ¼ãƒ«]é…ä¸‹ã« [ã‚¹ã‚¯ãƒªãƒ—ãƒˆ]ãŒè¿½åŠ ã•ã‚Œã¦ã„ã¾ã™ã€‚
 
 ![menu image](https://github.com/ChangeVision/astah-script-plugin/raw/master/doc/screenshots/script_plugin_menu_ja.png)
 
-g‚¢•û
+ä½¿ã„æ–¹
 ------------
 
-1. Astah‚ğ‹N“®‚µAƒXƒNƒŠƒvƒg‚ğÀs‚µ‚½‚¢ƒvƒƒWƒFƒNƒgƒtƒ@ƒCƒ‹(.asta)‚ğŠJ‚«‚Ü‚·B
-2. Astahã•”ƒƒjƒ…[[ƒc[ƒ‹]-[ƒXƒNƒŠƒvƒg]‚ğ‘I‘ğ‚·‚é‚ÆAV‹KƒXƒNƒŠƒvƒgƒ_ƒCƒAƒƒO‚ªŠJ‚«‚Ü‚·B
-3. ã’i‚ÉƒXƒNƒŠƒvƒg‚ğ“ü—Í‚·‚é‚©A‚Ü‚½‚ÍƒXƒNƒŠƒvƒgƒ_ƒCƒAƒƒO‚Ìƒƒjƒ…[[ƒtƒ@ƒCƒ‹]-[ŠJ‚­]‚ğ‘I‘ğ‚µA—\‚ß—pˆÓ‚µ‚Ä‚¨‚¢‚½JavaScript‚Ìƒtƒ@ƒCƒ‹‚ğŠJ‚«‚Ü‚·B  
-   ƒTƒ“ƒvƒ‹ƒXƒNƒŠƒvƒg‚ÍŒãÒ‚Ì•û–@‚Å‚¨‚µ‚­‚¾‚³‚¢B
-4. ƒXƒNƒŠƒvƒgƒ_ƒCƒAƒƒO‚Ìƒƒjƒ…[[ƒAƒNƒVƒ‡ƒ“]-[Às]‚ğ‘I‘ğ‚µ‚Ü‚·B(ƒVƒ‡[ƒgƒJƒbƒgƒL[ [Ctrl+R]‚Å‚àÀs‚Å‚«‚Ü‚·)
-5. ‰º’i‚ÉŒ‹‰Ê‚ª•\¦‚³‚ê‚Ü‚·B
-6. ã’i‚É“ü—Í‚µ‚½ƒXƒNƒŠƒvƒg‚Í [ƒtƒ@ƒCƒ‹]-[–¼‘O‚ğ•t‚¯‚Ä•Û‘¶]‚Å•Û‘¶‚Å‚«‚Ü‚·B
+1. Astahã‚’èµ·å‹•ã—ã€ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å®Ÿè¡Œã—ãŸã„ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆãƒ•ã‚¡ã‚¤ãƒ«(.asta)ã‚’é–‹ãã¾ã™ã€‚
+2. Astahä¸Šéƒ¨ãƒ¡ãƒ‹ãƒ¥ãƒ¼[ãƒ„ãƒ¼ãƒ«]-[ã‚¹ã‚¯ãƒªãƒ—ãƒˆ]ã‚’é¸æŠã™ã‚‹ã¨ã€æ–°è¦ã‚¹ã‚¯ãƒªãƒ—ãƒˆãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãŒé–‹ãã¾ã™ã€‚
+3. ä¸Šæ®µã«ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å…¥åŠ›ã™ã‚‹ã‹ã€ã¾ãŸã¯ã‚¹ã‚¯ãƒªãƒ—ãƒˆãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼[ãƒ•ã‚¡ã‚¤ãƒ«]-[é–‹ã]ã‚’é¸æŠã—ã€äºˆã‚ç”¨æ„ã—ã¦ãŠã„ãŸJavaScriptã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ãã¾ã™ã€‚  
+   ã‚µãƒ³ãƒ—ãƒ«ã‚¹ã‚¯ãƒªãƒ—ãƒˆã¯å¾Œè€…ã®æ–¹æ³•ã§ãŠè©¦ã—ãã ã•ã„ã€‚
+4. ã‚¹ã‚¯ãƒªãƒ—ãƒˆãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼[ã‚¢ã‚¯ã‚·ãƒ§ãƒ³]-[å®Ÿè¡Œ]ã‚’é¸æŠã—ã¾ã™ã€‚(ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼ [Ctrl+R]ã§ã‚‚å®Ÿè¡Œã§ãã¾ã™)
+5. ä¸‹æ®µã«çµæœãŒè¡¨ç¤ºã•ã‚Œã¾ã™ã€‚
+6. ä¸Šæ®µã«å…¥åŠ›ã—ãŸã‚¹ã‚¯ãƒªãƒ—ãƒˆã¯ [ãƒ•ã‚¡ã‚¤ãƒ«]-[åå‰ã‚’ä»˜ã‘ã¦ä¿å­˜]ã§ä¿å­˜ã§ãã¾ã™ã€‚
 
 
-ƒTƒ“ƒvƒ‹ƒXƒNƒŠƒvƒg
+ã‚µãƒ³ãƒ—ãƒ«ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
 ---------------------
-`sample_scripts` ƒtƒHƒ‹ƒ_‚É‚ÍA‡Œv14ƒP‚ÌJavaScriptƒTƒ“ƒvƒ‹ƒtƒ@ƒCƒ‹‚ªŠi”[‚³‚ê‚Ä‚¢‚Ü‚·B
+`sample_scripts` ãƒ•ã‚©ãƒ«ãƒ€ã«ã¯ã€åˆè¨ˆ14ã‚±ã®JavaScriptã‚µãƒ³ãƒ—ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ ¼ç´ã•ã‚Œã¦ã„ã¾ã™ã€‚
 
  * addSetterGetter.js
  * addStereotypeToSelectedModel.js
@@ -63,7 +63,7 @@ Astah: http://astah.change-vision.com/ja/
  * searchAndEdit.js
  * useJavaGUI.js
 
-—á) JavaScript: `printClasses.js`
+ä¾‹) JavaScript: `printClasses.js`
 ```javascript
 importPackage(com.change_vision.jude.api.inf.model);
 var classes = astah.findElements(IClass);
@@ -71,26 +71,26 @@ for(var i in classes) {
     println(classes[i].getName());
 }
 ```
- * ’è‹`Ï‚İ‚Ì•Ï”‚ğg‚¦‚Ü‚·B
+ * å®šç¾©æ¸ˆã¿ã®å¤‰æ•°ã‚’ä½¿ãˆã¾ã™ã€‚
    * `projectAccessor`
      * It's an object of ProjectAccessor in Astah API.
      * `null` if Astah has no project.
    * `astah`
      * It's same as `projectAccessor`.
    * `astahWindow`
-     * AstahƒƒCƒ“ƒEƒBƒ“ƒhƒEƒIƒuƒWƒFƒNƒg
+     * Astahãƒ¡ã‚¤ãƒ³ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
    * `scriptWindow`
      * It's the window object of the script plugin.
- * ƒXƒNƒŠƒvƒg‚Å Astah API‚ğg‚¦‚Ü‚·B
-   * Astah API ŠT—v
+ * ã‚¹ã‚¯ãƒªãƒ—ãƒˆã§ Astah APIã‚’ä½¿ãˆã¾ã™ã€‚
+   * Astah API æ¦‚è¦
      * <http://astah.change-vision.com/ja/astah-api.html>
-   * Astah API —˜—pƒKƒCƒh (Javadoc)
+   * Astah API åˆ©ç”¨ã‚¬ã‚¤ãƒ‰ (Javadoc)
      * <http://members.change-vision.com/javadoc/astah-api/latest/api/en/doc/javadoc/index.html>
  * You are able to use the Java API in your script.
 
-ƒrƒ‹ƒh
+ãƒ“ãƒ«ãƒ‰
 ------------
-1. Astah Plug-in SDK‚ğƒCƒ“ƒXƒg[ƒ‹‚µ‚Ü‚·B - <http://astah.change-vision.com/ja/plugins.html>
+1. Astah Plug-in SDKã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã™ã€‚ - <http://astah.change-vision.com/ja/plugins.html>
 2. `git clone git://github.com/ChangeVision/astah-script-plugin.git`
 3. `cd script`
 4. `astah-build`
@@ -100,13 +100,13 @@ for(var i in classes) {
 
       * `astah-mvn eclipse:eclipse`
 
-‘¼‚ÌƒXƒNƒŠƒvƒgŒ¾Œê‚ğg‚¤
+ä»–ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆè¨€èªã‚’ä½¿ã†
 ------------
-OSGi JSR223€‹’‚Ì‘¼‚ÌƒXƒNƒŠƒvƒgŒ¾Œê‚ğg—p‚Å‚«‚Ü‚·B
+OSGi JSR223æº–æ‹ ã®ä»–ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆè¨€èªã‚’ä½¿ç”¨ã§ãã¾ã™ã€‚
 
-1. g—p‚µ‚½‚¢ƒXƒNƒŠƒvƒgŒ¾Œê‚Ì jarƒtƒ@ƒCƒ‹‚ğƒ_ƒEƒ“ƒ[ƒh‚µ‚Ü‚·B(—á. groovy-all.jar, jruby-###.jar)
-2. Astah plugins ƒtƒHƒ‹ƒ_‚É 1‚Ìjarƒtƒ@ƒCƒ‹‚ğƒRƒs[‚µ‚Ü‚·B(~/.astah/plugins)
-3. Astah‚ğ‹N“®‚µ‚Ü‚·
+1. ä½¿ç”¨ã—ãŸã„ã‚¹ã‚¯ãƒªãƒ—ãƒˆè¨€èªã® jarãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ã¾ã™ã€‚(ä¾‹. groovy-all.jar, jruby-###.jar)
+2. Astah plugins ãƒ•ã‚©ãƒ«ãƒ€ã« 1ã®jarãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚³ãƒ”ãƒ¼ã—ã¾ã™ã€‚(â€¾/.astah/plugins)
+3. Astahã‚’èµ·å‹•ã—ã¾ã™
 
 License
 ------------
