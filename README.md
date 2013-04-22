@@ -19,7 +19,7 @@ You are able to edit and run with ECMAScript(Javascript).
 
 How to install
 ------------
-1. Deploy the jar file you downloaded from [Astah Script Plugin](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.0.html), in the **"plugins"** folder...
+1. Deploy the jar file you downloaded from [Astah Script Plugin](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.0.html){:target="_blank"}, in the **"plugins"** folder...
 
     e.g.) for Professional edition: 
     `$USER_HOME/.astah/professional/plugins/`
