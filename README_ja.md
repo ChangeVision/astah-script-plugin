@@ -18,7 +18,7 @@ Astah: http://astah.change-vision.com/ja/
 
 インストールの流れ
 ------------
-1. [Download](http://cdn.change-vision.com/plugins/astah_script_plugin-1.0.0.zip)から zipファイルをダウンロードし、任意のフォルダへ展開します。
+1. [Download](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.0.html)から zipファイルをダウンロードし、任意のフォルダへ展開します。
 
     例) Astah Professional, Windows: `$USER_HOME/.astah/professional/plugins/`,  `C:\Program Files\astah-professional\plugins\`
     Astah Professional, Mac OS X: `/Applications/astah professional/plguins/`
