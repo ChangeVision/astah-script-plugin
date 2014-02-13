@@ -6,12 +6,12 @@
 		<bundle.namespace>com.change_vision.astah.extension.plugin.script</bundle.namespace>
 		<plugin.install>true</plugin.install>
 		<astah.version>6.6</astah.version>
-		<astah.edition>all</astah.edition>
+		<astah.edition>pro,uml,com</astah.edition>
 	</properties>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.change_vision.astah.extension.plugin</groupId>
 	<artifactId>script</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>%bundle.name</name>
 	<description>%bundle.description</description>
