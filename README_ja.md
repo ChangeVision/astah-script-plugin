@@ -4,11 +4,12 @@ Astah Script Plugin
 
 バージョン
 ------------
-1.0.0
+1.0.1
 
 対象エディション
 ------------------
 Astah Community, UML, and Professional 6.5.x 以降
+Astah SysML 1.2以降 と Astah GSN（実験的)
 サンプルスクリプトの一部は、Astah UML、Astah Professionalのみで利用可能。
 Astah: http://astah.change-vision.com/ja/
 
@@ -18,13 +19,16 @@ Astah: http://astah.change-vision.com/ja/
 
 インストールの流れ
 ------------
-1. [Download](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.0.html)から zipファイルをダウンロードし、任意のフォルダへ展開します。
+1. [Download](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.1.html)から zipファイルをダウンロードし、任意のフォルダへ展開します。
 
     例) Astah Professional, Windows: `$USER_HOME/.astah/professional/plugins/`,  `C:¥Program Files¥astah-professional¥plugins¥`
-    Astah Professional, Mac OS X: `/Applications/astah professional/plguins/`
+    Astah Professional, Mac OS X: `/Applications/astah professional/plugins/`
     
     例) Astah Community, Windows: `$USER_HOME/.astah/community/plugins/`, `C:¥Program Files¥astah-community¥plugins¥`
-    Astah Community, Mac OS X: `/Applications/astah community/plguins/`
+    Astah Community, Mac OS X: `/Applications/astah community/plugins/`
+
+    例) Astah SysML, Windows: `$USER_HOME/.astah/sysml/plugins/`, `C:¥Program Files¥astah-sysml¥plugins¥`
+    Astah SysML, Mac OS X: `/Applications/astah sysml/plugins/`
 
 2. Astahを起動します。
 

@@ -4,11 +4,12 @@ Astah Script Plugin
 
 Version
 ------------
-1.0.0
+1.0.1
 
 Available for
 ------------
 Astah Community, UML, and Professional 6.5.x or later.
+Astah SysML 1.2 or later and Astah GSN(experimental).
 Some sample scripts are available only for Astah UML and Professional.
 Astah: http://astah.net/
 
@@ -19,7 +20,7 @@ You are able to edit and run with ECMAScript(Javascript).
 
 How to install
 ------------
-1. Deploy the jar file you downloaded from [Astah Script Plugin](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.0.html), in the **"plugins"** folder...
+1. Deploy the jar file you downloaded from [Astah Script Plugin](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.1.html), in the **"plugins"** folder...
 
     e.g.) for Professional edition: 
     `$USER_HOME/.astah/professional/plugins/`
@@ -28,8 +29,13 @@ How to install
     
     e.g.) for Community edition: 
     `$USER_HOME/.astah/community/plugins/`
-    `/Applications/astah community/plguins/`
+    `/Applications/astah community/plugins/`
     `C:¥Program Files¥astah-community¥plugins¥`
+
+    e.g.) for SysML edition: 
+    `$USER_HOME/.astah/sysml/plugins/`
+    `/Applications/astah sysml/plugins/`
+    `C:¥Program Files¥astah-sysml¥plugins¥`
 
 2. Start Astah
 
