@@ -9,7 +9,7 @@ Version
 Available for
 ------------
 Astah Community, UML, and Professional 6.5.x or later.
-Astah SysML 1.2 or later and Astah GSN(experimental).
+Astah SysML 1.2 or later and Astah GSN 1.0.
 Some sample scripts are available only for Astah UML and Professional.
 Astah: http://astah.net/
 
