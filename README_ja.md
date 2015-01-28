@@ -8,16 +8,15 @@ Astah Script Plugin
 
 対象エディション
 ------------------
-Astah Community, UML, and Professional 6.5.x 以降
-Astah SysML 1.2以降 と Astah GSN（実験的)
-サンプルスクリプトの一部は、Astah UML、Astah Professionalのみで利用可能。
-Astah: http://astah.change-vision.com/ja/
+astah* community, UML, and professional 6.5.x 以降
+astah* SysML 1.2以降 と astah* GSN 1.0
+astah*: http://astah.change-vision.com/ja/
 
 概要
 ------------
-スクリプト言語でAstahにアクセスできます。ECMAScript(JavaScript)の編集と実行が可能です。
+スクリプト言語でastah*にアクセスできます。ECMAScript(JavaScript)の編集と実行が可能です。
 
-インストールの流れ
+インストールの流れ (※[astah* GSNのみ、インストール方法が異なります](http://astah-users.change-vision.com/ja/modules/xhnewbb/viewtopic.php?topic_id=1776))
 ------------
 1. [Download](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.1.html)から zipファイルをダウンロードし、任意のフォルダへ展開します。
 
