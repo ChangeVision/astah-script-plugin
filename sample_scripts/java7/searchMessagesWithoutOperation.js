@@ -1,5 +1,9 @@
 //Only for Astah UML and Professional.
 //This script searches Messages which is not related to an operation.
+importPackage(com.change_vision.jude.api.inf.model);
+importPackage(com.change_vision.jude.api.inf.presentation);
+importPackage(com.change_vision.jude.api.inf.editor);
+importPackage(java.awt.geom);
 
 var COLOR_PROPERTY_KEY = "font.color";
 var newColor = '#0000ff';
@@ -10,7 +14,7 @@ function run() {
     var targets = searchMessagesWithoutOperation();
 
     if (targets.length === 0) {
-        print('No target messages found');
+        println('No target messages found');
         return;
     }
     
@@ -26,21 +30,18 @@ function run() {
 }
 
 function searchMessagesWithoutOperation() {
-    with(new JavaImporter(
-        com.change_vision.jude.api.inf.model)) {
-        var targets = [];
-        var messages = astah.findElements(IMessage.class);
-        for (var i in messages) {
-            var message = messages[i];
-            if (message.isReturnMessage() || message.isCreateMessage()) {
-                continue;  //ignore
-            }
-            var operation = message.getOperation();
-            if (operation === null) {
-                targets.push(message);
-                print('HIT: Message [' + message.getName()
-                    + '] in Sequence diagram [' + message.getPresentations()[0].getDiagram().getFullName('::') + ']');
-            }
+    var targets = [];
+    var messages = astah.findElements(IMessage);
+    for (var i in messages) {
+        var message = messages[i];
+        if (message.isReturnMessage() || message.isCreateMessage()) {
+            continue;  //ignore
+        }
+        var operation = message.getOperation();
+        if (operation === null) {
+            targets.push(message);
+            println('HIT: Message [' + message.getName()
+                + '] in Sequence diagram [' + message.getPresentations()[0].getDiagram().getFullName('::') + ']');
         }
     }
     return targets;

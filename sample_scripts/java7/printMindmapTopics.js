@@ -1,5 +1,7 @@
 //This script writes out a list of text in the current mindmap.
 //The format is like a WiKi.
+importPackage(com.change_vision.jude.api.inf.model);
+
 var depth = 0;
 var INDENT_STR = '  '; //2 spaces
 var ITEM_MARKER_STR = '* ';
@@ -7,24 +9,21 @@ var ITEM_MARKER_STR = '* ';
 run();
 
 function run() {
-    with(new JavaImporter(
-            com.change_vision.jude.api.inf.model)) {
-        var diagramViewManager = astah.getViewManager().getDiagramViewManager();
-        var diagram = diagramViewManager.getCurrentDiagram();
-        if (!(diagram instanceof IMindMapDiagram)) {
-            print('Open a mindmap and run again.');
-            return;
-        }
-    
-        var rootTopic = diagram.getRoot();
-        depth = 0;
-        printTopics(rootTopic);
+    var diagramViewManager = astah.getViewManager().getDiagramViewManager();
+    var diagram = diagramViewManager.getCurrentDiagram();
+    if (!(diagram instanceof IMindMapDiagram)) {
+        println('Open a mindmap and run again.');
+        return;
     }
+
+    var rootTopic = diagram.getRoot();
+    depth = 0;
+    printTopics(rootTopic);
 }
 
 function printTopics(topic) {
     var topicLabel = topic.getLabel().replaceAll('\n', ' ');
-    print(getIndent(depth) + ITEM_MARKER_STR + topicLabel);
+    println(getIndent(depth) + ITEM_MARKER_STR + topicLabel);
 
     var topics = topic.getChildren();
     depth++;

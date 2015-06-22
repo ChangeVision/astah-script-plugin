@@ -1,10 +1,6 @@
 //This script generates a CSV file about the classes in the current model.
 //CSV format:
 // "Name of a class", "Name of the parent model", "Definition of the class"
-importPackage(com.change_vision.jude.api.inf.model);
-importPackage(java.io);
-importPackage(javax.swing);
-
 run();
 
 function run() {
@@ -12,49 +8,59 @@ function run() {
 }
 
 function exportClassesInCsv() {
-    classes = astah.findElements(IClass);
+    with(new JavaImporter(
+            com.change_vision.jude.api.inf.model)) {
+        classes = astah.findElements(IClass.class);
+    }
     
     var csvFile = selectCsvFile();
     if (csvFile == null) {
-        println('Canceled');
+        print('Canceled');
         return;
     }
-    println('Selected file = ' + csvFile.getAbsolutePath());
+    print('Selected file = ' + csvFile.getAbsolutePath());
     if (csvFile.exists()) {
         var msg = "Do you want to overwrite?";
         var ret = JOptionPane.showConfirmDialog(scriptWindow, msg);
         if (ret != JOptionPane.YES_OPTION) {
-            println('Canceled');
+            print('Canceled');
             return;
         }
     }
-    
-    var writer = new BufferedWriter(new FileWriter(csvFile));
-    
-    for(var i in classes) {
-        var clazz = classes[i];
-        var rowData = [];
-        rowData.push(clazz.getName());
-        rowData.push(clazz.getOwner().getName());
-        rowData.push(clazz.getDefinition());
-        writeRow(writer, rowData);
+
+    with(new JavaImporter(
+            java.io)) {
+        var writer = new BufferedWriter(new FileWriter(csvFile));
+        
+        for(var i in classes) {
+            var clazz = classes[i];
+            var rowData = [];
+            rowData.push(clazz.getName());
+            rowData.push(clazz.getOwner().getName());
+            rowData.push(clazz.getDefinition());
+            writeRow(writer, rowData);
+        }
+        
+        writer.close();
     }
-    
-    writer.close();
 }
 
 function selectCsvFile() {
-    var chooser = new JFileChooser();
-    var selected = chooser.showSaveDialog(scriptWindow);
-    if (selected == JFileChooser.APPROVE_OPTION) {
-        var file = chooser.getSelectedFile();
-        if (file.getName().toLowerCase().endsWith('.csv')) {
-            return file;
+    with(new JavaImporter(
+            java.io,
+            javax.swing)) {
+        var chooser = new JFileChooser();
+        var selected = chooser.showSaveDialog(scriptWindow);
+        if (selected == JFileChooser.APPROVE_OPTION) {
+            var file = chooser.getSelectedFile();
+            if (file.getName().toLowerCase().endsWith('.csv')) {
+                return file;
+            } else {
+                return new File(file.getAbsolutePath() + '.csv');
+            }
         } else {
-            return new File(file.getAbsolutePath() + '.csv');
+            return null;
         }
-    } else {
-        return null;
     }
 }
 
