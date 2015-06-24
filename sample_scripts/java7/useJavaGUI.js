@@ -7,19 +7,28 @@ var frame = new JFrame("Frame title");
 frame.setLayout(new FlowLayout());
 
 var goButton = new JButton("Go!");
-goButton.addActionListener(new ActionListener({
-    actionPerformed: function(event) {
-        JOptionPane.showMessageDialog(frame, "Hello!");
-    }
-}));
+addActionListenerGoButton(frame, goButton);
 
 var closeButton = new JButton("Close");
-closeButton.addActionListener(new ActionListener({
-    actionPerformed: function(event) {
-        frame.setVisible(false);
-        frame.dispose();
-    }
-}));
+addActionListenerCloseButton(frame, closeButton);
+
+function addActionListenerGoButton(f, b) {
+    b.addActionListener(new ActionListener({
+        actionPerformed: function(event) {
+            JOptionPane.showMessageDialog(f, "Hello!");
+        }
+    }));
+    return b;
+}
+
+function addActionListenerCloseButton(f, b) {
+    b.addActionListener(new ActionListener({
+        actionPerformed: function(event) {
+            f.setVisible(false);
+            f.dispose();
+        }
+    }));
+}
 
 frame.add(goButton);
 frame.add(closeButton);
