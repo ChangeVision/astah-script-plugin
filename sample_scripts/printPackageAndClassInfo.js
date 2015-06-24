@@ -1,7 +1,5 @@
 //This script writes out the information of packages and classes.
 //The current Astah project should have packages and classes.
-importPackage(com.change_vision.jude.api.inf.model);
-
 run();
 
 function run() {
@@ -10,24 +8,27 @@ function run() {
 }
 
 function printPackageInfo(iPackage) {
-    println("Package name: " + iPackage.getName());
-    println("Package definition: " + iPackage.getDefinition());
+    print("Package name: " + iPackage.getName());
+    print("Package definition: " + iPackage.getDefinition());
 
-    // Display packages and classes
-    var namedElements = iPackage.getOwnedElements();
-    for (var i in namedElements) {
-        var namedElement = namedElements[i];
-        if (namedElement instanceof IPackage) {
-            printPackageInfo(namedElement);
-        } else if (namedElement instanceof IClass) {
-            printClassInfo(namedElement);
+    with(new JavaImporter(
+            com.change_vision.jude.api.inf.model)) {
+        // Display packages and classes
+        var namedElements = iPackage.getOwnedElements();
+        for (var i in namedElements) {
+            var namedElement = namedElements[i];
+            if (namedElement instanceof IPackage) {
+                printPackageInfo(namedElement);
+            } else if (namedElement instanceof IClass) {
+                printClassInfo(namedElement);
+            }
         }
     }
 }
 
 function printClassInfo(iClass) {
-    println("Class name: " + iClass.getName());
-    println("Class definition: " + iClass.getDefinition());
+    print("Class name: " + iClass.getName());
+    print("Class definition: " + iClass.getDefinition());
 
     // Display all attributes
     var iAttributes = iClass.getAttributes();
@@ -49,13 +50,13 @@ function printClassInfo(iClass) {
 }
 
 function printOperationInfo(iOperation) {
-    println("Operation name: " + iOperation.getName());
-    println("Operation returnType: " + iOperation.getReturnTypeExpression());
-    println("Operation definition: " + iOperation.getDefinition());
+    print("Operation name: " + iOperation.getName());
+    print("Operation returnType: " + iOperation.getReturnTypeExpression());
+    print("Operation definition: " + iOperation.getDefinition());
 }
 
 function printAttributeInfo(iAttribute) {
-    println("Attribute name: " + iAttribute.getName());
-    println("Attribute type: " + iAttribute.getTypeExpression());
-    println("Attribute definition: " + iAttribute.getDefinition());
+    print("Attribute name: " + iAttribute.getName());
+    print("Attribute type: " + iAttribute.getTypeExpression());
+    print("Attribute definition: " + iAttribute.getDefinition());
 }

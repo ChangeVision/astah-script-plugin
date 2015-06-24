@@ -4,7 +4,7 @@ Astah Script Plugin
 
 Version
 ------------
-1.0.1
+1.0.2
 
 Available for
 ------------
@@ -20,7 +20,7 @@ You are able to edit and run with ECMAScript(Javascript).
 
 How to install
 ------------
-1. Deploy the jar file you downloaded from [Astah Script Plugin](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.1.html), in the **"plugins"** folder...
+1. Deploy the jar file you downloaded from [Astah Script Plugin](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.2.html), in the **"plugins"** folder...
 
     e.g.) for Professional edition: 
     `$USER_HOME/.astah/professional/plugins/`
@@ -47,10 +47,12 @@ Script example
 ------------
 JavaScript:
 ```javascript
-importPackage(com.change_vision.jude.api.inf.model);
-classes = astah.findElements(IClass);
-for(var i in classes) {
-    println(classes[i].getName());
+with(new JavaImporter(
+        com.change_vision.jude.api.inf.model)) {
+    classes = astah.findElements(IClass.class);
+    for(var i in classes) {
+        print(classes[i].getName());
+    }
 }
 ```
  * Other examples are in the `sample_scripts` directory.
@@ -93,7 +95,7 @@ You are able to use other script languages which support OSGi JSR223(experimenta
 
 License
 ------------
-Copyright 2012 Change Vision, Inc.
+Copyright 2015 Change Vision, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this work except in compliance with the License.

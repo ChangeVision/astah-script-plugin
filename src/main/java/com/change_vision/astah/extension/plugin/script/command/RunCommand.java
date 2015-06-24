@@ -72,8 +72,33 @@ public class RunCommand {
             errorMessage = errorMessage.replaceFirst("javax.script.ScriptException: ", "");
             errorMessage = errorMessage.replaceFirst("sun.org.mozilla.javascript.internal.EcmaError: ", "");
             System.err.println(errorMessage);
+            printMigrationHint(errorMessage);
+        } catch (Throwable t) {
+            String errorMessage = t.toString();
+            System.err.println(errorMessage);
+            printMigrationHint(errorMessage);
         }
         scEngine.getBindings(ScriptContext.GLOBAL_SCOPE).clear();
         scEngine.getBindings(ScriptContext.ENGINE_SCOPE).clear();
+    }
+    
+    private static void printMigrationHint(String errorMessage) {
+        if (errorMessage.contains("println")) {
+            String hint = "Migration Hint: ";
+            hint += "Use print() instead of println()";
+            System.err.println(hint);
+            return;
+        } else if (errorMessage.contains("importPackage")) {
+            String hint = "Migration Hint: ";
+            hint += "Use Java.type() or JavaImporter() instead of importPackage()";
+            System.err.println(hint);
+            return;
+        } else if (errorMessage.contains("java.lang.Class")
+                && errorMessage.contains("findElements")) {
+            String hint = "Migration Hint: ";
+            hint += "Add .class to the name of the Java class";
+            System.err.println(hint);
+            return;
+        }        
     }
 }

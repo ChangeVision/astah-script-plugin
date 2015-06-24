@@ -4,7 +4,7 @@ Astah Script Plugin
 
 バージョン
 ------------
-1.0.1
+1.0.2
 
 対象エディション
 ------------------
@@ -21,7 +21,7 @@ astah*: http://astah.change-vision.com/ja/
 ------------
 (※[astah* GSNのみ、インストール方法が異なります](http://astah-users.change-vision.com/ja/modules/xhnewbb/viewtopic.php?topic_id=1776))
 
-1. [Download](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.1.html)から zipファイルをダウンロードし、任意のフォルダへ展開します。
+1. [Download](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.2.html)から zipファイルをダウンロードし、任意のフォルダへ展開します。
 
     例) Astah Professional, Windows: `$USER_HOME/.astah/professional/plugins/`,  `C:¥Program Files¥astah-professional¥plugins¥`
     Astah Professional, Mac OS X: `/Applications/astah professional/plugins/`
@@ -52,7 +52,7 @@ astah*: http://astah.change-vision.com/ja/
 
 サンプルスクリプト
 ---------------------
-`sample_scripts` フォルダには、合計14ケのJavaScriptサンプルファイルが格納されています。
+`sample_scripts` フォルダには、合計15ケのJavaScriptサンプルファイルが格納されています。
 
  * addSetterGetter.js
  * addStereotypeToSelectedModel.js
@@ -67,14 +67,17 @@ astah*: http://astah.change-vision.com/ja/
  * printPackageAndClassInfo.js
  * printPresentationProperties.js
  * searchAndEdit.js
+ * searchMessagesWithoutOperation.js
  * useJavaGUI.js
 
 例) JavaScript: `printClasses.js`
 ```javascript
-importPackage(com.change_vision.jude.api.inf.model);
-var classes = astah.findElements(IClass);
-for(var i in classes) {
-    println(classes[i].getName());
+with(new JavaImporter(
+        com.change_vision.jude.api.inf.model)) {
+    classes = astah.findElements(IClass.class);
+    for(var i in classes) {
+        print(classes[i].getName());
+    }
 }
 ```
  * 定義済みの変数を使えます。
@@ -116,7 +119,7 @@ OSGi JSR223準拠の他のスクリプト言語を使用できます。
 
 License
 ------------
-Copyright 2012 Change Vision, Inc.
+Copyright 2015 Change Vision, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this work except in compliance with the License.
