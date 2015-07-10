@@ -1,7 +1,9 @@
 package com.change_vision.astah.extension.plugin.script;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -16,6 +18,7 @@ import java.util.List;
 
 import javax.script.ScriptEngineFactory;
 import javax.swing.Box;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -31,6 +34,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -469,8 +473,43 @@ public class ScriptView {
         // Script Kind
         context.scriptKindCombobox = createScriptKindCombobox();
         toolBar.add(context.scriptKindCombobox);
+        adjustButtonSize(toolBar);
 
         return toolBar;
+    }
+
+    private void adjustButtonSize(JToolBar toolBar) {
+        double scale = getUIScale();
+        if (scale <= 1.0) {
+            return;
+        }
+        for (int buttonIndex = 0; buttonIndex < toolBar.getComponentCount(); buttonIndex++) {
+            Component component = toolBar.getComponent(buttonIndex);
+            if (!(component instanceof JButton)) {
+                continue;
+            }
+            JButton button = JButton.class.cast(component);
+            Icon icon = button.getIcon();
+            if (!(icon instanceof ImageIcon)) {
+                continue;
+            }
+            ImageIcon imageIcon = ImageIcon.class.cast(icon);
+            int buttonWidth = (int) Math.ceil(imageIcon.getIconWidth() * scale);
+            int buttonHeight = (int) Math.ceil(imageIcon.getIconHeight() * scale);
+            changeIconScale(imageIcon, buttonWidth, buttonHeight);
+        }
+    }
+
+    private double getUIScale() {
+        final double labelNormalFontSize = 12.0;
+        Font font = Font.class.cast(UIManager.get("Label.font"));
+        double scale = font.getSize() / labelNormalFontSize;
+        return scale;
+    }
+
+    private void changeIconScale(ImageIcon icon, int newWidth, int newHeight) {
+        Image image = icon.getImage();
+        icon.setImage(image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH));
     }
 
     private ImageIcon getIcon(String path) {
