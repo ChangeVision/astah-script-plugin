@@ -2,6 +2,7 @@ package com.change_vision.astah.extension.plugin.script;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -28,12 +29,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
 import org.fife.ui.rtextarea.RecordableTextAction;
@@ -192,8 +195,24 @@ public class ScriptView {
         });
         context.scriptTextArea = scriptTextArea;
         RTextScrollPane areaWithScroll = new RTextScrollPane(scriptTextArea);
+        adjustFontSizeForHighResDisplay(areaWithScroll);
         areaWithScroll.setFoldIndicatorEnabled(true);
         return areaWithScroll;
+    }
+
+    private void adjustFontSizeForHighResDisplay(RTextScrollPane rTextScrollPane) {
+        Font font = new JTextField().getFont();
+        RTextArea textArea = rTextScrollPane.getTextArea();
+        if (textArea != null) {
+            textArea.setFont(font);
+        }
+        Gutter gutter = rTextScrollPane.getGutter();
+        if (gutter == null) {
+            return;
+        }
+        for (int i = 0; i < gutter.getComponentCount(); i++) {
+            gutter.getComponent(i).setFont(font);
+        }
     }
 
     private JComboBox createScriptKindCombobox() {
