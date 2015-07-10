@@ -1,7 +1,6 @@
 package com.change_vision.astah.extension.plugin.script;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.Window;
@@ -55,9 +54,6 @@ import com.change_vision.jude.api.inf.exception.ProjectNotFoundException;
 import com.change_vision.jude.api.inf.ui.IWindow;
 
 public class ScriptView {
-    private static final double DIVIDER_LOCATION = 0.8;
-    private static final int DIALOG_WIDTH = 500;
-    private static final int DIALOG_HEIGHT = 700;
 
     private static ScriptView instance; // singleton
     private ScriptViewContext context = new ScriptViewContext();
@@ -121,10 +117,8 @@ public class ScriptView {
             }
         });
         dialog.pack();
-        dialog.setSize(new Dimension(DIALOG_WIDTH, DIALOG_HEIGHT));
         dialog.setLocationRelativeTo(parentWindow);
         dialog.setVisible(true);
-        mainPane.setDividerLocation(DIVIDER_LOCATION);
 
         context.dialog = dialog;
         NewCommand.execute(context);

@@ -1,5 +1,6 @@
 package com.change_vision.astah.extension.plugin.script;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -24,6 +25,7 @@ import org.fife.ui.rtextarea.RTextAreaEditorKit;
 public class ScriptTextArea extends RSyntaxTextArea {
     public static final String DEFAULT_LANGUAGE = "ECMAScript";
     private static final int TAB_SIZE = 4;
+    private static final int ROW_NUM = 30;
     
     public ScriptTextArea() {
         initialize();
@@ -163,4 +165,11 @@ public class ScriptTextArea extends RSyntaxTextArea {
             }
         }
     }
+
+    @Override
+    public Dimension getPreferredScrollableViewportSize() {
+        Dimension size = super.getPreferredSize();
+        return new Dimension(size.width, getRowHeight() * ROW_NUM);
+    }
+
 }
