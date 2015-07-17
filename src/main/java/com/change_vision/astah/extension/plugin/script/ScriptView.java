@@ -1,7 +1,9 @@
 package com.change_vision.astah.extension.plugin.script;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -16,6 +18,7 @@ import java.util.List;
 
 import javax.script.ScriptEngineFactory;
 import javax.swing.Box;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -28,12 +31,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
 import org.fife.ui.rtextarea.RecordableTextAction;
@@ -52,9 +58,6 @@ import com.change_vision.jude.api.inf.exception.ProjectNotFoundException;
 import com.change_vision.jude.api.inf.ui.IWindow;
 
 public class ScriptView {
-    private static final double DIVIDER_LOCATION = 0.8;
-    private static final int DIALOG_WIDTH = 500;
-    private static final int DIALOG_HEIGHT = 700;
 
     private static ScriptView instance; // singleton
     private ScriptViewContext context = new ScriptViewContext();
@@ -118,10 +121,8 @@ public class ScriptView {
             }
         });
         dialog.pack();
-        dialog.setSize(new Dimension(DIALOG_WIDTH, DIALOG_HEIGHT));
         dialog.setLocationRelativeTo(parentWindow);
         dialog.setVisible(true);
-        mainPane.setDividerLocation(DIVIDER_LOCATION);
 
         context.dialog = dialog;
         NewCommand.execute(context);
@@ -192,8 +193,24 @@ public class ScriptView {
         });
         context.scriptTextArea = scriptTextArea;
         RTextScrollPane areaWithScroll = new RTextScrollPane(scriptTextArea);
+        adjustFontSizeForHighResDisplay(areaWithScroll);
         areaWithScroll.setFoldIndicatorEnabled(true);
         return areaWithScroll;
+    }
+
+    private void adjustFontSizeForHighResDisplay(RTextScrollPane rTextScrollPane) {
+        Font font = new JTextField().getFont();
+        RTextArea textArea = rTextScrollPane.getTextArea();
+        if (textArea != null) {
+            textArea.setFont(font);
+        }
+        Gutter gutter = rTextScrollPane.getGutter();
+        if (gutter == null) {
+            return;
+        }
+        for (int i = 0; i < gutter.getComponentCount(); i++) {
+            gutter.getComponent(i).setFont(font);
+        }
     }
 
     private JComboBox createScriptKindCombobox() {
@@ -456,8 +473,43 @@ public class ScriptView {
         // Script Kind
         context.scriptKindCombobox = createScriptKindCombobox();
         toolBar.add(context.scriptKindCombobox);
+        adjustButtonSize(toolBar);
 
         return toolBar;
+    }
+
+    private void adjustButtonSize(JToolBar toolBar) {
+        double scale = getUIScale();
+        if (scale <= 1.0) {
+            return;
+        }
+        for (int buttonIndex = 0; buttonIndex < toolBar.getComponentCount(); buttonIndex++) {
+            Component component = toolBar.getComponent(buttonIndex);
+            if (!(component instanceof JButton)) {
+                continue;
+            }
+            JButton button = JButton.class.cast(component);
+            Icon icon = button.getIcon();
+            if (!(icon instanceof ImageIcon)) {
+                continue;
+            }
+            ImageIcon imageIcon = ImageIcon.class.cast(icon);
+            int buttonWidth = (int) Math.ceil(imageIcon.getIconWidth() * scale);
+            int buttonHeight = (int) Math.ceil(imageIcon.getIconHeight() * scale);
+            changeIconScale(imageIcon, buttonWidth, buttonHeight);
+        }
+    }
+
+    private double getUIScale() {
+        final double labelNormalFontSize = 12.0;
+        Font font = Font.class.cast(UIManager.get("Label.font"));
+        double scale = font.getSize() / labelNormalFontSize;
+        return scale;
+    }
+
+    private void changeIconScale(ImageIcon icon, int newWidth, int newHeight) {
+        Image image = icon.getImage();
+        icon.setImage(image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH));
     }
 
     private ImageIcon getIcon(String path) {

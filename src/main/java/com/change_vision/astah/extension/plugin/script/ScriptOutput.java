@@ -1,6 +1,8 @@
 package com.change_vision.astah.extension.plugin.script;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -17,6 +19,9 @@ public class ScriptOutput extends JTextPane {
 
     private static final SimpleAttributeSet DEFAULT_SIMPLE_ATTRIBUTE_SET = new SimpleAttributeSet();
     private static final SimpleAttributeSet ERROR_SIMPLE_ATTRIBUTE_SET;
+    private static final int ROW_NUM = 6;
+    private static final int CHAR_NUM = 45;
+
     static {
         ERROR_SIMPLE_ATTRIBUTE_SET = new SimpleAttributeSet();
         StyleConstants.setForeground(ERROR_SIMPLE_ATTRIBUTE_SET, Color.red);
@@ -74,4 +79,13 @@ public class ScriptOutput extends JTextPane {
             });
         }
     }
+
+    @Override
+    public Dimension getPreferredScrollableViewportSize() {
+        FontMetrics fontMetrics = getFontMetrics(getFont());
+        int newWidth = fontMetrics.stringWidth("m") * CHAR_NUM;
+        int newHeight = fontMetrics.getHeight() * ROW_NUM;
+        return new Dimension(newWidth, newHeight);
+    }
+
 }
