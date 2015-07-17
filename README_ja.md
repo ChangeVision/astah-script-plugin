@@ -9,7 +9,7 @@ Astah Script Plugin
 対象エディション
 ------------------
 astah* community, UML, and professional 6.5.x 以降
-astah* SysML 1.2以降 と astah* GSN 1.0
+astah* SysML 1.2以降, astah* GSN 1.0以降
 
 astah*: http://astah.change-vision.com/ja/
 
@@ -21,7 +21,7 @@ astah*: http://astah.change-vision.com/ja/
 ------------
 (※[astah* GSNのみ、インストール方法が異なります](http://astah-users.change-vision.com/ja/modules/xhnewbb/viewtopic.php?topic_id=1776))
 
-1. [Download](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.2.html)から zipファイルをダウンロードし、任意のフォルダへ展開します。
+1. [Download](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.3.html)から zipファイルをダウンロードし、任意のフォルダへ展開し、jarファイルを以下のpluginsフォルダに保存します。
 
     例) Astah Professional, Windows: `$USER_HOME/.astah/professional/plugins/`,  `C:¥Program Files¥astah-professional¥plugins¥`
     Astah Professional, Mac OS X: `/Applications/astah professional/plugins/`
@@ -82,20 +82,20 @@ with(new JavaImporter(
 ```
  * 定義済みの変数を使えます。
    * `projectAccessor`
-     * It's an object of ProjectAccessor in Astah API.
+     * Astah APIのProjectAccessorのオブジェクトです。
      * `null` if Astah has no project.
    * `astah`
-     * It's same as `projectAccessor`.
+     * `projectAccessor` と同じです。
    * `astahWindow`
-     * Astahメインウィンドウオブジェクト
+     * Astahメインウィンドウオブジェクトです。
    * `scriptWindow`
-     * It's the window object of the script plugin.
+     * スクリプトプラグインのウィンドウオブジェクトです。
  * スクリプトで Astah APIを使えます。
    * Astah API 概要
      * <http://astah.change-vision.com/ja/astah-api.html>
    * Astah API 利用ガイド (Javadoc)
      * <http://members.change-vision.com/javadoc/astah-api/latest/api/en/doc/javadoc/index.html>
- * You are able to use the Java API in your script.
+ * スクリプトでJava APIを使えます。
 
 ビルド
 ------------

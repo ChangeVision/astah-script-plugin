@@ -4,12 +4,12 @@ Astah Script Plugin
 
 Version
 ------------
-1.0.2
+1.0.3
 
 Available for
 ------------
 Astah Community, UML, and Professional 6.5.x or later.
-Astah SysML 1.2 or later and Astah GSN 1.0.
+Astah SysML 1.2, Astah GSN 1.0 or later.
 Some sample scripts are available only for Astah UML and Professional.
 Astah: http://astah.net/
 
@@ -20,7 +20,7 @@ You are able to edit and run with ECMAScript(Javascript).
 
 How to install
 ------------
-1. Deploy the jar file you downloaded from [Astah Script Plugin](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.2.html), in the **"plugins"** folder...
+1. Deploy the jar file you downloaded from [Astah Script Plugin](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.3.html), in the **"plugins"** folder.
 
     e.g.) for Professional edition: 
     `$USER_HOME/.astah/professional/plugins/`
@@ -37,9 +37,9 @@ How to install
     `/Applications/astah sysml/plugins/`
     `C:¥Program Files¥astah-sysml¥plugins¥`
 
-2. Start Astah
+2. Start Astah.
 
-3. You find that the [Script...] has been added under the [Tool] menu (Below the [Export Image])
+3. The [Script...] has been added under the [Tool] menu.
 
 ![menu image](https://github.com/ChangeVision/astah-script-plugin/raw/master/doc/screenshots/script_menu.png)
 
@@ -56,7 +56,7 @@ with(new JavaImporter(
 }
 ```
  * Other examples are in the `sample_scripts` directory.
- * You can use the following predefined variables in your script.
+ * Use the following predefined variables in your script.
    * `projectAccessor`
      * It's an object of ProjectAccessor in Astah API.
      * `null` if Astah has no project.
@@ -66,12 +66,12 @@ with(new JavaImporter(
      * It's the main window object of Astah.
    * `scriptWindow`
      * It's the window object of the script plugin.
- * You are able to use the Astah API in your script.
+ * Use the Astah API in your script.
    * Astah API
      * <http://astah.net/features/astah-api>
    * Astah API Javadoc
      * <http://members.change-vision.com/javadoc/astah-api/latest/api/en/doc/javadoc/index.html>
- * You are able to use the Java API in your script.
+ * Use the Java API in your script.
 
 How to build
 ------------
