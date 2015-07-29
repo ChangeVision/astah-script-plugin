@@ -2,8 +2,8 @@ package com.change_vision.astah.extension.plugin.script.command;
 
 import java.awt.Cursor;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import com.change_vision.astah.extension.plugin.script.ScriptViewContext;
 import com.change_vision.astah.extension.plugin.script.util.FileChooser;
@@ -25,11 +25,11 @@ public class SaveCommand {
         context.dialog.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             context.fileModificationChecker.stop();
-            FileWriter fw = new FileWriter(context.currentFile);
+            PrintWriter writer = new PrintWriter(context.currentFile, context.encoding);
             String text = context.scriptTextArea.getText();
             int textSize = text.length();
-            fw.write(context.scriptTextArea.getText(), 0, textSize);
-            fw.close();
+            writer.write(context.scriptTextArea.getText(), 0, textSize);
+            writer.close();
             context.fileModificationChecker.start();
             context.setIsModified(false);
             context.statusBar.setText(Messages.getMessage("status.saved") + fileName);
