@@ -16,8 +16,6 @@ import com.change_vision.astah.extension.plugin.script.util.FileChooser;
 import com.change_vision.astah.extension.plugin.script.util.Messages;
 
 public class OpenCommand {
-    public static final String ENCODING = "UTF-8";
-    
     public static void execute(ScriptViewContext context) {
         execute(context, null);
     }
@@ -45,7 +43,7 @@ public class OpenCommand {
         File f = new File(filePath);
         context.dialog.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f), ENCODING));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f), context.encoding));
             context.scriptTextArea.read(reader, null);
             reader.close();
             context.scriptTextArea.discardAllEdits();
