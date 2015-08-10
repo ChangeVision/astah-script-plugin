@@ -29,7 +29,8 @@ public class ScriptViewContext {
     public HistoryManager historyManager;
     public FileModificationChecker fileModificationChecker;
     public ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
-
+    public String encoding = "UTF-8";
+    
     public void setIsModified(boolean isModified) {
         this.isModified = isModified;
         updateTitleBar();

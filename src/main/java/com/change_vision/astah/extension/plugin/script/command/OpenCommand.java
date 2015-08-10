@@ -3,9 +3,10 @@ package com.change_vision.astah.extension.plugin.script.command;
 import java.awt.Cursor;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.script.ScriptEngine;
 import javax.swing.JOptionPane;
@@ -18,7 +19,7 @@ public class OpenCommand {
     public static void execute(ScriptViewContext context) {
         execute(context, null);
     }
-
+    
     public static void execute(ScriptViewContext context, String filePath) {
         if (context.isModified) {
             int result = JOptionPane.showConfirmDialog(context.dialog,
@@ -42,7 +43,7 @@ public class OpenCommand {
         File f = new File(filePath);
         context.dialog.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(f));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f), context.encoding));
             context.scriptTextArea.read(reader, null);
             reader.close();
             context.scriptTextArea.discardAllEdits();

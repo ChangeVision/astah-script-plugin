@@ -2,9 +2,10 @@ package com.change_vision.astah.extension.plugin.script.command;
 
 import java.awt.Cursor;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.swing.JOptionPane;
 
@@ -26,8 +27,8 @@ public class ReloadCommand {
 
         context.dialog.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(context.currentFile));
-            // FileReader reader = new FileReader(f);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
+                    context.currentFile), context.encoding));
             context.scriptTextArea.read(reader, null);
             reader.close();
             context.scriptTextArea.discardAllEdits();
