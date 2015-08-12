@@ -4,7 +4,7 @@ Astah Script Plugin
 
 バージョン
 ------------
-1.0.2
+1.0.4
 
 対象エディション
 ------------------
@@ -21,7 +21,7 @@ astah*: http://astah.change-vision.com/ja/
 ------------
 (※[astah* GSNのみ、インストール方法が異なります](http://astah-users.change-vision.com/ja/modules/xhnewbb/viewtopic.php?topic_id=1776))
 
-1. [Download](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.3.html)から zipファイルをダウンロードし、任意のフォルダへ展開し、jarファイルを以下のpluginsフォルダに保存します。
+1. [Download](http://astah.change-vision.com/plugins/astah_script_plugin/1.0.4.html)から zipファイルをダウンロードし、任意のフォルダへ展開し、jarファイルを以下のpluginsフォルダに保存します。
 
     例) Astah Professional, Windows: `$USER_HOME/.astah/professional/plugins/`,  `C:¥Program Files¥astah-professional¥plugins¥`
     Astah Professional, Mac OS X: `/Applications/astah professional/plugins/`
