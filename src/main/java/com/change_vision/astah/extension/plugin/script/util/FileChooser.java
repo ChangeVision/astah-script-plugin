@@ -2,6 +2,7 @@ package com.change_vision.astah.extension.plugin.script.util;
 
 import java.awt.Dialog;
 import java.awt.FileDialog;
+import java.io.File;
 
 import javax.swing.JFileChooser;
 
@@ -28,9 +29,17 @@ public class FileChooser {
     
     private static String chooseFileByFileDialog(Dialog parentDialog, String title, int mode) {
         FileDialog fileDialog = new FileDialog(parentDialog, title, mode);
+        String defaultDirStr = ConfigUtil.getDefaultScriptDirectory();
+        if (defaultDirStr != null) {
+            File defaultDirFile = new File(defaultDirStr);
+            if (defaultDirFile.canRead() && defaultDirFile.canExecute()) {
+                fileDialog.setDirectory(defaultDirStr);
+            }
+        }
         fileDialog.setVisible(true);
         String selectedFile = fileDialog.getFile();
         if (selectedFile != null) {
+            ConfigUtil.saveDefaultScriptDirectory(fileDialog.getDirectory());
             return fileDialog.getDirectory() + selectedFile;
         } else {
             return null;
@@ -39,6 +48,13 @@ public class FileChooser {
     
     private static String chooseFileByJFileChooser(Dialog parentDialog, String title, int mode) {
         JFileChooser chooser = new JFileChooser();
+        String defaultDirStr = ConfigUtil.getDefaultScriptDirectory();
+        if (defaultDirStr != null) {
+            File defaultDirFile = new File(defaultDirStr);
+            if (defaultDirFile.canRead() && defaultDirFile.canExecute()) {
+                chooser.setCurrentDirectory(defaultDirFile);
+            }
+        }
         chooser.setDialogTitle(title);
         int returnValue = 0;
         if (mode == FileDialog.LOAD) {
@@ -48,6 +64,8 @@ public class FileChooser {
         }
         
         if (returnValue == JFileChooser.APPROVE_OPTION) {
+            ConfigUtil.saveDefaultScriptDirectory(chooser.getSelectedFile().getParentFile()
+                    .getAbsolutePath());
             return chooser.getSelectedFile().getAbsolutePath();
         } else {
             return null;
