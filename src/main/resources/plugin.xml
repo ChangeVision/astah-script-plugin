@@ -9,7 +9,7 @@
              label="%show_script_view_action_label"
              class="com.change_vision.astah.extension.plugin.script.ShowScriptViewAction"
              tooltip="%show_script_view_action_tooltip"
-             menubarPath="tool/export_image"
+             menubarPath="tool/"
              id="com.change_vision.astah.extension.plugin.script.ShowScriptViewAction">
             </action>
         </actionSet>
