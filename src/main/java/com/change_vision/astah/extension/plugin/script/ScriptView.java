@@ -467,6 +467,16 @@ public class ScriptView {
                 RunCommand.execute(context);
             }
         });
+        
+        JButton consoleClearButton = new JButton(getIcon("images/clear_console.png"));
+        toolBar.add(consoleClearButton);
+        consoleClearButton.setToolTipText(Messages.getMessage("action.clear_console.tooltip"));
+        consoleClearButton.setRequestFocusEnabled(false);
+        consoleClearButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ClearOutputCommand.execute(context);
+            }
+        });
 
         toolBar.add(Box.createGlue());
 
