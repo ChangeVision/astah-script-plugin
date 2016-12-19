@@ -47,6 +47,7 @@ import org.fife.ui.rtextarea.RecordableTextAction;
 import com.change_vision.astah.extension.plugin.script.command.BrowseCommand;
 import com.change_vision.astah.extension.plugin.script.command.ClearOutputCommand;
 import com.change_vision.astah.extension.plugin.script.command.CloseCommand;
+import com.change_vision.astah.extension.plugin.script.command.ConfigCommand;
 import com.change_vision.astah.extension.plugin.script.command.NewCommand;
 import com.change_vision.astah.extension.plugin.script.command.OpenCommand;
 import com.change_vision.astah.extension.plugin.script.command.ReloadCommand;
@@ -475,6 +476,18 @@ public class ScriptView {
         consoleClearButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ClearOutputCommand.execute(context);
+            }
+        });
+        
+        toolBar.addSeparator();
+        
+        JButton configButton = new JButton(getIcon("images/option.png"));
+        toolBar.add(configButton);
+        configButton.setToolTipText(Messages.getMessage("action.config.label"));
+        configButton.setRequestFocusEnabled(false);
+        configButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ConfigCommand.excute(null);
             }
         });
 
