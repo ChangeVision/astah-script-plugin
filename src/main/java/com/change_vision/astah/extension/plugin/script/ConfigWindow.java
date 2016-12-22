@@ -18,30 +18,30 @@ public class ConfigWindow extends JDialog implements ActionListener {
     public ConfigWindow() {
         setLayout(new BorderLayout());
         
-        JPanel panel0 = new JPanel();
-        JPanel panel1 = new JPanel();
+        JPanel componentPanel = new JPanel();
+        JPanel southBtnPanel = new JPanel();
         
+        componentPanel.setLayout(new GridBagLayout());
+        //southBtnPanel.setLayout(new BoxLayout(southBtnPanel, BoxLayout.X_AXIS));
+        southBtnPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         
+        add("Center", componentPanel);
+        add("South", southBtnPanel);
         
-        panel0.setLayout(new GridBagLayout());
-        panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
-        
-        add("South", panel0);
-        add("Center", panel1);
-        
-        
-        JCheckBox ckbox = new JCheckBox();
-        ckbox = new JCheckBox(Messages.getMessage("config.clear_console"));
+        JCheckBox ckbox = new JCheckBox(Messages.getMessage("config.clear_console"));
+        //ckbox.addActionListener(this);
            
-        JButton btn1 = new JButton(Messages.getMessage("config.ok.button"));
-        btn1.addActionListener(this);
+        JButton okBtn = new JButton(Messages.getMessage("config.ok.button"));
+        okBtn.addActionListener(this);
+        okBtn.setActionCommand("okBtn");
         
-        JButton btn2 = new JButton(Messages.getMessage("config.cancel.button"));
-        btn1.addActionListener(this);
+        JButton cancelBtn = new JButton(Messages.getMessage("config.cancel.button"));
+        cancelBtn.addActionListener(this);
+        cancelBtn.setActionCommand("cancelBtn");
         
-        panel1.add(ckbox);
-        panel0.add(btn1);
-        panel0.add(btn2);
+        componentPanel.add(ckbox);
+        southBtnPanel.add(okBtn);
+        southBtnPanel.add(cancelBtn);
         
         setTitle(Messages.getMessage("action.config.label"));
         setSize(400, 300);
@@ -49,6 +49,22 @@ public class ConfigWindow extends JDialog implements ActionListener {
      }
      
      public void actionPerformed(ActionEvent e) {
-        setVisible(true);
+         String cmd = e.getActionCommand();
+
+         if (cmd.equals("okBtn")) {
+             java.lang.System.out.println("OK!!!");
+         } else if (cmd.equals("cancelBtn")) {
+             java.lang.System.out.println("Cancel...");
+         }
+         
+         /*
+         JCheckBox checkbox = (JCheckBox)e.getSource();
+         if (checkbox.isSelected()) {
+             java.lang.System.out.println("check in");
+         } else {
+             java.lang.System.out.println("check out");
+         }
+         */
+         
      }
 }
