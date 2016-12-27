@@ -8,6 +8,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import javax.swing.text.BadLocationException;
 
+import com.change_vision.astah.extension.plugin.script.ConfigManager;
 import com.change_vision.astah.extension.plugin.script.ScriptViewContext;
 import com.change_vision.astah.extension.plugin.script.util.Messages;
 import com.change_vision.jude.api.inf.editor.TransactionManager;
@@ -18,6 +19,9 @@ public class RunCommand {
     private static final String SEPARATOR_STRING = "\n============ ";
 
     public static void execute(ScriptViewContext context) {
+        if (ConfigManager.console_clear == true) {
+            ClearOutputCommand.execute(context);
+        }
         context.dialog.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         context.statusBar.setText(Messages.getMessage("status.running"));
         String scriptKind = (String) context.scriptKindCombobox.getSelectedItem();

@@ -5,16 +5,14 @@ import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-
 import com.change_vision.astah.extension.plugin.script.util.Messages;
 
 public class ConfigWindow extends JDialog implements ActionListener {
+    JCheckBox consoleClearBox = new JCheckBox(Messages.getMessage("config.clear_console"), ConfigManager.console_clear);
     public ConfigWindow() {
         setLayout(new BorderLayout());
         
@@ -28,8 +26,6 @@ public class ConfigWindow extends JDialog implements ActionListener {
         add("Center", componentPanel);
         add("South", southBtnPanel);
         
-        JCheckBox ckbox = new JCheckBox(Messages.getMessage("config.clear_console"));
-        //ckbox.addActionListener(this);
            
         JButton okBtn = new JButton(Messages.getMessage("config.ok.button"));
         okBtn.addActionListener(this);
@@ -39,7 +35,7 @@ public class ConfigWindow extends JDialog implements ActionListener {
         cancelBtn.addActionListener(this);
         cancelBtn.setActionCommand("cancelBtn");
         
-        componentPanel.add(ckbox);
+        componentPanel.add(consoleClearBox);
         southBtnPanel.add(okBtn);
         southBtnPanel.add(cancelBtn);
         
@@ -53,18 +49,19 @@ public class ConfigWindow extends JDialog implements ActionListener {
 
          if (cmd.equals("okBtn")) {
              java.lang.System.out.println("OK!!!");
+             if (consoleClearBox.isSelected()) {
+                 ConfigManager.console_clear = true;
+                 ConfigManager.save(ConfigManager.console_clear);
+                 java.lang.System.out.println("check!");
+             } else{
+                 ConfigManager.console_clear = false;
+                 ConfigManager.save(ConfigManager.console_clear);
+                 java.lang.System.out.println("no check!");
+             }
+             setVisible(false);
          } else if (cmd.equals("cancelBtn")) {
              java.lang.System.out.println("Cancel...");
+             setVisible(false);
          }
-         
-         /*
-         JCheckBox checkbox = (JCheckBox)e.getSource();
-         if (checkbox.isSelected()) {
-             java.lang.System.out.println("check in");
-         } else {
-             java.lang.System.out.println("check out");
-         }
-         */
-         
      }
 }
