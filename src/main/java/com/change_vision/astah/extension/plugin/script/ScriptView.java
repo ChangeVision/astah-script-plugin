@@ -87,7 +87,7 @@ public class ScriptView {
         if (window != null) {
             parentWindow = window.getParent();
         }
-        new ConfigManager();    //ConfigLoad
+        new ConfigManager();
         
         JDialog dialog = new JDialog(parentWindow, Messages.getMessage("dialog.title"));
 

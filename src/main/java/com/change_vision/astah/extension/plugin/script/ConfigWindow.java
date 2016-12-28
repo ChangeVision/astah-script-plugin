@@ -12,7 +12,9 @@ import javax.swing.JPanel;
 import com.change_vision.astah.extension.plugin.script.util.Messages;
 
 public class ConfigWindow extends JDialog implements ActionListener {
-    JCheckBox consoleClearBox = new JCheckBox(Messages.getMessage("config.clear_console"), ConfigManager.console_clear);
+    JCheckBox consoleClearBox;
+    
+    
     public ConfigWindow() {
         setLayout(new BorderLayout());
         
@@ -25,8 +27,7 @@ public class ConfigWindow extends JDialog implements ActionListener {
         
         add("Center", componentPanel);
         add("South", southBtnPanel);
-        
-           
+          
         JButton okBtn = new JButton(Messages.getMessage("config.ok.button"));
         okBtn.addActionListener(this);
         okBtn.setActionCommand("okBtn");
@@ -35,6 +36,7 @@ public class ConfigWindow extends JDialog implements ActionListener {
         cancelBtn.addActionListener(this);
         cancelBtn.setActionCommand("cancelBtn");
         
+        consoleClearBox = new JCheckBox(Messages.getMessage("config.clear_console"), ConfigManager.console_clear);
         componentPanel.add(consoleClearBox);
         southBtnPanel.add(okBtn);
         southBtnPanel.add(cancelBtn);
@@ -48,19 +50,14 @@ public class ConfigWindow extends JDialog implements ActionListener {
          String cmd = e.getActionCommand();
 
          if (cmd.equals("okBtn")) {
-             java.lang.System.out.println("OK!!!");
              if (consoleClearBox.isSelected()) {
                  ConfigManager.console_clear = true;
-                 ConfigManager.save(ConfigManager.console_clear);
-                 java.lang.System.out.println("check!");
              } else{
                  ConfigManager.console_clear = false;
-                 ConfigManager.save(ConfigManager.console_clear);
-                 java.lang.System.out.println("no check!");
              }
+             ConfigManager.save(ConfigManager.console_clear);
              setVisible(false);
          } else if (cmd.equals("cancelBtn")) {
-             java.lang.System.out.println("Cancel...");
              setVisible(false);
          }
      }
