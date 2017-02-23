@@ -376,6 +376,13 @@ public class ScriptView {
         JMenu helpMenu = new JMenu(Messages.getMessage("help_menu.label"));
         helpMenu.setMnemonic(KeyEvent.VK_H);
 
+        helpMenu.add(item = new JMenuItem(Messages.getMessage("action.open_sample_script.label")));
+        item.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                BrowseCommand.execute(Messages.getMessage("sample_script_uri"));
+            }
+        });
+
         helpMenu.add(item = new JMenuItem(Messages.getMessage("action.open_api_guide.label")));
         item.setMnemonic(KeyEvent.VK_A);
         item.addActionListener(new ActionListener() {
