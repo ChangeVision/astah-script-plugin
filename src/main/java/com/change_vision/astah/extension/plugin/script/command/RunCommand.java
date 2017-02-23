@@ -19,7 +19,7 @@ public class RunCommand {
     private static final String SEPARATOR_STRING = "\n============ ";
 
     public static void execute(ScriptViewContext context) {
-        if (ConfigManager.console_clear == true) {
+        if (ConfigManager.getInstance().isConsoleClear() == true) {
             ClearOutputCommand.execute(context);
         }
         context.dialog.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));

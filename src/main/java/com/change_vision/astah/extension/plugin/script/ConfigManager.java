@@ -3,25 +3,31 @@ package com.change_vision.astah.extension.plugin.script;
 import java.util.prefs.*;
 
 public class ConfigManager {
-    public static boolean console_clear = false;
+    private static final ConfigManager configManager = new ConfigManager();
     private static Preferences prefs;
-    private static final String KEY = "console_clear";
-    
-    public ConfigManager(){
+    private static final String KEY_CONSOLE_CLEAR = "console_clear";
+
+    public ConfigManager() {
         prefs = Preferences.userNodeForPackage(this.getClass());
-        load();
+    }
+    
+    public static ConfigManager getInstance() {
+        return configManager;
     }
 
-    public static void save(Boolean check){
+    public void save() {
         try{
-            prefs.putBoolean(KEY, check);
             prefs.flush();
         }catch(BackingStoreException ex){
             ex.printStackTrace();
         }
     }
 
-    public void load(){
-        console_clear = prefs.getBoolean(KEY, false);
+    public boolean isConsoleClear() {
+        return prefs.getBoolean(KEY_CONSOLE_CLEAR, false);
+    }
+    
+    public void setConsoleClear(boolean isClear) {
+        prefs.putBoolean(KEY_CONSOLE_CLEAR, isClear);
     }
 }
