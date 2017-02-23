@@ -19,7 +19,7 @@ public class ScriptOutput extends JTextPane {
 
     private static final SimpleAttributeSet DEFAULT_SIMPLE_ATTRIBUTE_SET = new SimpleAttributeSet();
     private static final SimpleAttributeSet ERROR_SIMPLE_ATTRIBUTE_SET;
-    private static final int ROW_NUM = 6;
+    private static final int ROW_NUM = 10;
     private static final int CHAR_NUM = 45;
 
     static {

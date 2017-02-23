@@ -302,8 +302,7 @@ public class ScriptView {
 
         fileMenu.addSeparator();
 
-        fileMenu.add(item = new JMenuItem(Messages.getMessage("action.close.label"),
-                getIcon("images/close.png")));
+        fileMenu.add(item = new JMenuItem(Messages.getMessage("action.close.label")));
         item.setMnemonic(KeyEvent.VK_C);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
