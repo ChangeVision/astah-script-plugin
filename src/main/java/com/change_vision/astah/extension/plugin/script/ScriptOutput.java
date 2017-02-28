@@ -2,6 +2,7 @@ package com.change_vision.astah.extension.plugin.script;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -82,6 +83,22 @@ public class ScriptOutput extends JTextPane {
 
     @Override
     public Dimension getPreferredScrollableViewportSize() {
+        Font font = getFont();
+        setFont(new Font(font.getName(), font.getStyle(), ConfigManager.getInstance().getFontSize()));
+        return updateFont();
+    }
+
+    public void changeFontSize() {
+        Font font = getFont();
+        int newFontSize = ConfigManager.getInstance().getFontSize();
+        if (font.getSize() == newFontSize) {
+            return;
+        }
+        setFont(new Font(font.getName(), font.getStyle(), newFontSize));
+        updateFont();
+    }
+
+    private Dimension updateFont() {
         FontMetrics fontMetrics = getFontMetrics(getFont());
         int newWidth = fontMetrics.stringWidth("m") * CHAR_NUM;
         int newHeight = fontMetrics.getHeight() * ROW_NUM;

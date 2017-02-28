@@ -47,7 +47,6 @@ import org.fife.ui.rtextarea.RecordableTextAction;
 import com.change_vision.astah.extension.plugin.script.command.BrowseCommand;
 import com.change_vision.astah.extension.plugin.script.command.ClearOutputCommand;
 import com.change_vision.astah.extension.plugin.script.command.CloseCommand;
-import com.change_vision.astah.extension.plugin.script.command.ConfigCommand;
 import com.change_vision.astah.extension.plugin.script.command.NewCommand;
 import com.change_vision.astah.extension.plugin.script.command.OpenCommand;
 import com.change_vision.astah.extension.plugin.script.command.ReloadCommand;
@@ -87,7 +86,6 @@ public class ScriptView {
         if (window != null) {
             parentWindow = window.getParent();
         }
-        new ConfigManager();
         
         JDialog dialog = new JDialog(parentWindow, Messages.getMessage("dialog.title"));
 
@@ -140,6 +138,7 @@ public class ScriptView {
     private JSplitPane createMainPanel() {
         // Script Text
         RTextScrollPane scriptPane = createScriptEditorTextArea();
+        context.scriptScrollPane = scriptPane;
 
         // Output Text
         context.scriptOutput = new ScriptOutput();
@@ -171,6 +170,7 @@ public class ScriptView {
         splitPane.setOneTouchExpandable(true);
         splitPane.setTopComponent(scriptPane);
         splitPane.setBottomComponent(outputPane);
+        splitPane.setDividerLocation(0.7);
 
         return splitPane;
     }
@@ -203,11 +203,30 @@ public class ScriptView {
 
     private void adjustFontSizeForHighResDisplay(RTextScrollPane rTextScrollPane) {
         Font font = new JTextField().getFont();
-        RTextArea textArea = rTextScrollPane.getTextArea();
+        font = new Font(font.getName(), font.getStyle(), ConfigManager.getInstance().getFontSize());
+        updateFont(rTextScrollPane, font);
+    }
+    
+    private void changeFontSize(RTextScrollPane scrollPane) {
+        Font font = new JTextField().getFont();
+        RTextArea textArea = scrollPane.getTextArea();
+        if (textArea != null) {
+            font = textArea.getFont();
+        }
+        int newFontSize = ConfigManager.getInstance().getFontSize();
+        if (font.getSize() == newFontSize) {
+            return;
+        }
+        font = new Font(font.getName(), font.getStyle(), newFontSize);
+        updateFont(scrollPane, font);
+    }
+    
+    private void updateFont(RTextScrollPane pane, Font font) {
+        RTextArea textArea = pane.getTextArea();
         if (textArea != null) {
             textArea.setFont(font);
         }
-        Gutter gutter = rTextScrollPane.getGutter();
+        Gutter gutter = pane.getGutter();
         if (gutter == null) {
             return;
         }
@@ -495,7 +514,14 @@ public class ScriptView {
         configButton.setRequestFocusEnabled(false);
         configButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ConfigCommand.excute(null);
+                ConfigDialog configDialog = ConfigDialog.getInstance();
+                configDialog.update();
+                configDialog.setLocationRelativeTo(context.dialog);
+                configDialog.setVisible(true);
+                if (!configDialog.isSubmitted()) {
+                    return;
+                }
+                changeFontSize();
             }
         });
 
@@ -507,6 +533,11 @@ public class ScriptView {
         adjustButtonSize(toolBar);
 
         return toolBar;
+    }
+    
+    public void changeFontSize() {
+        changeFontSize(context.scriptScrollPane);
+        context.scriptOutput.changeFontSize();
     }
 
     private void adjustButtonSize(JToolBar toolBar) {
