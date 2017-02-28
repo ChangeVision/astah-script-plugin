@@ -122,6 +122,7 @@ public class ScriptView {
             }
         });
         dialog.pack();
+        mainPane.setDividerLocation(0.7);
         dialog.setLocationRelativeTo(parentWindow);
         dialog.setVisible(true);
 
@@ -170,7 +171,6 @@ public class ScriptView {
         splitPane.setOneTouchExpandable(true);
         splitPane.setTopComponent(scriptPane);
         splitPane.setBottomComponent(outputPane);
-        splitPane.setDividerLocation(0.7);
 
         return splitPane;
     }
@@ -431,6 +431,7 @@ public class ScriptView {
         JButton newButton = new JButton(getIcon("images/new.png"));
         toolBar.add(newButton);
         newButton.setToolTipText(Messages.getMessage("action.new.tooltip"));
+        newButton.setBorderPainted(false);
         newButton.setRequestFocusEnabled(false);
         newButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -441,6 +442,7 @@ public class ScriptView {
         JButton openButton = new JButton(getIcon("images/open.png"));
         toolBar.add(openButton);
         openButton.setToolTipText(Messages.getMessage("action.open.tooltip"));
+        openButton.setBorderPainted(false);
         openButton.setRequestFocusEnabled(false);
         openButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -451,6 +453,7 @@ public class ScriptView {
         JButton reloadButton = new JButton(getIcon("images/reload.png"));
         toolBar.add(reloadButton);
         reloadButton.setToolTipText(Messages.getMessage("action.reload.tooltip"));
+        reloadButton.setBorderPainted(false);
         reloadButton.setRequestFocusEnabled(false);
         reloadButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -461,6 +464,7 @@ public class ScriptView {
         JButton saveButton = new JButton(getIcon("images/save.png"));
         toolBar.add(saveButton);
         saveButton.setToolTipText(Messages.getMessage("action.save.tooltip"));
+        saveButton.setBorderPainted(false);
         saveButton.setRequestFocusEnabled(false);
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -473,6 +477,7 @@ public class ScriptView {
         RecordableTextAction undoAction = RTextArea.getAction(RTextArea.UNDO_ACTION);
         JButton undoButton = new JButton(undoAction);
         undoButton.setIcon(getIcon("images/undo.png"));
+        undoButton.setBorderPainted(false);
         undoButton.setHideActionText(true);
         undoButton.setRequestFocusEnabled(false);
         toolBar.add(undoButton);
@@ -480,6 +485,7 @@ public class ScriptView {
         RecordableTextAction redoAction = RTextArea.getAction(RTextArea.REDO_ACTION);
         JButton redoButton = new JButton(redoAction);
         redoButton.setIcon(getIcon("images/redo.png"));
+        redoButton.setBorderPainted(false);
         redoButton.setHideActionText(true);
         redoButton.setRequestFocusEnabled(false);
         toolBar.add(redoButton);
@@ -489,6 +495,7 @@ public class ScriptView {
         JButton runButton = new JButton(getIcon("images/run.png"));
         toolBar.add(runButton);
         runButton.setToolTipText(Messages.getMessage("action.run.tooltip"));
+        runButton.setBorderPainted(false);
         runButton.setRequestFocusEnabled(false);
         runButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -499,6 +506,7 @@ public class ScriptView {
         JButton consoleClearButton = new JButton(getIcon("images/clear_console.png"));
         toolBar.add(consoleClearButton);
         consoleClearButton.setToolTipText(Messages.getMessage("action.clear_console.tooltip"));
+        consoleClearButton.setBorderPainted(false);
         consoleClearButton.setRequestFocusEnabled(false);
         consoleClearButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -511,6 +519,7 @@ public class ScriptView {
         JButton configButton = new JButton(getIcon("images/option.png"));
         toolBar.add(configButton);
         configButton.setToolTipText(Messages.getMessage("action.config.label"));
+        configButton.setBorderPainted(false);
         configButton.setRequestFocusEnabled(false);
         configButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
