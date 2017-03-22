@@ -2,11 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<properties>
-		<bundle.symbolicName>com.change_vision.astah.extension.plugin.script</bundle.symbolicName>
-		<bundle.namespace>com.change_vision.astah.extension.plugin.script</bundle.namespace>
+		<bundle.symbolicName>safilia.plugin.script</bundle.symbolicName>
+		<bundle.namespace>safilia.plugin.script</bundle.namespace>
 		<plugin.install>true</plugin.install>
-		<astah.version>1.0</astah.version>
-		<astah.edition>pro,uml,com,sysml,gsn</astah.edition>
+		<safilia.version>1.0</safilia.version>
 	</properties>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.change_vision.astah.extension.plugin</groupId>
@@ -29,28 +28,39 @@
 			</releases>
 		</pluginRepository>
 	</pluginRepositories>
-	<repositories>
+    <repositories>
+        <repository>
+            <id>java.net</id>
+            <name>java.net Maven Repository</name>
+            <url>http://download.java.net/maven/2</url>
+            <releases>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>uk-central</id>
+            <url>http://uk.maven.org/maven2/</url>
+        </repository>
 		<repository>
-			<id>java.net</id>
-			<name>java.net Maven Repository</name>
-			<url>http://download.java.net/maven/2</url>
+			<id>dev.change-vision.com-nexus</id>
+			<name>dev.change-vision.com Maven Repository</name>
+			<url>https://dev.change-vision.com:8443/nexus/content/groups/public/</url>
 			<releases>
+				<enabled>true</enabled>
 			</releases>
 			<snapshots>
-				<enabled>false</enabled>
+				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-		<repository>
-			<id>uk-central</id>
-			<url>http://uk.maven.org/maven2/</url>
-		</repository>
-	</repositories>
+    </repositories>
 	<reporting>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>2.1.2</version>
+				<version>2.7</version>
 				<reportSets>
 					<reportSet>
 						<reports>
@@ -107,19 +117,23 @@
 				<version>2.4.2</version>
 			</plugin>
 
-			<plugin>
+            <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.8</version>
+				<version>2.9.1</version>
 				<configuration>
-					<source>1.6</source>
+					<source>1.7</source>
 					<encoding>UTF-8</encoding>
 					<docencoding>UTF-8</docencoding>
 					<charset>UTF-8</charset>
 					<show>protected</show>
 					<links>
-						<link>http://java.sun.com/javase/ja/6/docs/ja/api/</link>
-						<link>http://members.change-vision.com/javadoc/astah-api/6_2/api/ja/doc/javadoc/</link>
+						<link>
+							http://java.sun.com/javase/ja/7/docs/ja/api/
+						</link>
+						<link>
+							http://members.change-vision.com/javadoc/astah-api/6_7/api/ja/doc/javadoc/
+						</link>
 					</links>
 				</configuration>
 			</plugin>
@@ -159,64 +173,64 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-			<plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.5</version>
+				<version>2.6</version>
 				<configuration>
-					<encoding>UTF-8</encoding>
+					<encoding>utf-8</encoding>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>com.change_vision.astah</groupId>
-				<artifactId>astah-maven-plugin</artifactId>
-				<version>0.9.3</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<version>2.3.6</version>
-				<extensions>true</extensions>
-				<executions>
-					<execution>
-						<id>build-manifest</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>bundle</goal>
-						</goals>
-					</execution>
-				</executions>
-				<!-- | the following instructions build a simple set of public/private 
-					classes into an OSGi bundle -->
-				<configuration>
-					<instructions>
-						<unpackBundle>true</unpackBundle>
-						<Bundle-SymbolicName>${bundle.symbolicName}; singleton:=true</Bundle-SymbolicName>
-						<Bundle-DocURL>%bundle.docURL</Bundle-DocURL>
-						<Bundle-Version>${project.version}</Bundle-Version>
-						<!-- | assume public classes are in the top package, and private classes 
-							are under ".internal" -->
-						<Export-Package>!${bundle.namespace}.internal.*,${bundle.namespace}.*;version="${project.version}"</Export-Package>
-						<Private-Package>${bundle.namespace}.internal.*</Private-Package>
-						<Bundle-Activator>${bundle.namespace}.Activator</Bundle-Activator>
-						<Astah-Version>${astah.version}</Astah-Version>
-						<Astah-Edition>${astah.edition}</Astah-Edition>
-						<!-- | each module can override these defaults in their osgi.bnd file -->
-						<_include>-osgi.bnd</_include>
-						<Embed-Dependency>*;scope=compile|runtime;type=!pom</Embed-Dependency>
-					</instructions>
-				</configuration>
-			</plugin>
-		</plugins>
+            <plugin>
+                <groupId>com.change_vision.astah</groupId>
+                <artifactId>astah-maven-plugin</artifactId>
+                <version>1.0.0</version>
+            </plugin>
+			            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.5.0</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>build-manifest</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>bundle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <!-- | the following instructions build a simple set of public/private 
+                    classes into an OSGi bundle -->
+                <configuration>
+                    <unpackBundle>true</unpackBundle>
+                    <instructions>
+                        <Bundle-SymbolicName>${bundle.symbolicName}; singleton:=true</Bundle-SymbolicName>
+                        <Bundle-Version>${project.version}</Bundle-Version>
+                        <!-- | assume public classes are in the top package, and private classes 
+                            are under ".internal" -->
+                        <Export-Package>!${bundle.namespace}.internal.*,${bundle.namespace}.*;version="${project.version}"</Export-Package>
+                        <Private-Package>${bundle.namespace}.internal.*</Private-Package>
+                        <Bundle-Activator>${bundle.namespace}.Activator</Bundle-Activator>
+                        <Astah-Version>${astah.version}</Astah-Version>
+                        <Astah-Edition>${astah.edition}</Astah-Edition>
+                        <!-- | each module can override these defaults in their osgi.bnd file -->
+                        <_include>-osgi.bnd</_include>
+                        <Embed-Dependency>*;scope=compile|runtime;type=!pom</Embed-Dependency>
+                        <Embed-Transitive>true</Embed-Transitive>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -251,25 +265,28 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+        <extensions>
+          <extension>
+            <groupId>org.apache.maven.wagon</groupId>
+            <artifactId>wagon-ssh-external</artifactId>
+          </extension>
+        </extensions>
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>com.change_vision.astah</groupId>
-			<artifactId>astah-api</artifactId>
-			<version>${astah.version}</version>
+			<groupId>com.change_vision</groupId>
+			<artifactId>safilia-api</artifactId>
+			<version>${safilia.version}</version>
 			<scope>system</scope>
-			<systemPath>${astahPath}/astah-api.jar</systemPath>
+			<systemPath>${safiliaPath}/safilia-api.jar</systemPath>
 		</dependency>
-		<dependency>
-			<groupId>com.fifesoft</groupId>
-			<artifactId>rsyntaxtextarea</artifactId>
-			<version>2.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fifesoft</groupId>
-			<artifactId>autocomplete</artifactId>
-			<version>2.0.2</version>
-		</dependency>
+        <dependency>
+            <groupId>com.change_vision</groupId>
+            <artifactId>safilia</artifactId>
+            <version>1.0-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${safiliaPath}/safilia.jar</systemPath>
+        </dependency>
 		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
@@ -282,11 +299,15 @@
 			<version>4.2.0</version>
 			<scope>provided</scope>
 		</dependency>
+        <dependency>
+			<groupId>com.fifesoft</groupId>
+			<artifactId>rsyntaxtextarea</artifactId>
+			<version>2.0.2</version>
+		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.10</version>
-			<scope>test</scope>
+			<groupId>com.fifesoft</groupId>
+			<artifactId>autocomplete</artifactId>
+			<version>2.0.2</version>
 		</dependency>
 	</dependencies>
 </project>
