@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<properties>
-		<bundle.symbolicName>safilia.plugin.script</bundle.symbolicName>
-		<bundle.namespace>safilia.plugin.script</bundle.namespace>
+		<bundle.symbolicName>com.change_vision.safilia.plugin.script</bundle.symbolicName>
+		<bundle.namespace>com.change_vision.safilia.plugin.script</bundle.namespace>
 		<plugin.install>true</plugin.install>
 		<safilia.version>1.0</safilia.version>
 	</properties>

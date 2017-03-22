@@ -7,10 +7,10 @@
          id="com.change_vision.astah.extension.plugin.script.actionSet">
             <action
              label="%show_script_view_action_label"
-             class="safilia.plugin.script.ShowScriptViewAction"
+             class="com.change_vision.safilia.plugin.script.ShowScriptViewAction"
              tooltip="%show_script_view_action_tooltip"
              menubarPath="tool/export_image"
-             id="safilia.plugin.script.ShowScriptViewAction">
+             id="com.change_vision.safilia.plugin.script.ShowScriptViewAction">
             </action>
         </actionSet>
     </extension>
