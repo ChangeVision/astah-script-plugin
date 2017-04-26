@@ -309,7 +309,7 @@ public class ScriptView {
         });
 
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.save_as.label"),
-                getIcon("images/saveAs.png")));
+                getIcon("images/save.png")));
         item.setMnemonic(KeyEvent.VK_A);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, shortcutKeyMask
                 | KeyEvent.SHIFT_MASK));
@@ -381,7 +381,7 @@ public class ScriptView {
         actionMenu.addSeparator();
         
         actionMenu.add(item = new JMenuItem(Messages.getMessage("action.clear_console.label"),
-                getIcon("images/clear_console.png")));
+                getIcon("images/clear.png")));
         item.setMnemonic(KeyEvent.VK_C);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -450,17 +450,6 @@ public class ScriptView {
             }
         });
 
-        JButton reloadButton = new JButton(getIcon("images/reload.png"));
-        toolBar.add(reloadButton);
-        reloadButton.setToolTipText(Messages.getMessage("action.reload.tooltip"));
-        reloadButton.setBorderPainted(false);
-        reloadButton.setRequestFocusEnabled(false);
-        reloadButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ReloadCommand.execute(context);
-            }
-        });
-
         JButton saveButton = new JButton(getIcon("images/save.png"));
         toolBar.add(saveButton);
         saveButton.setToolTipText(Messages.getMessage("action.save.tooltip"));
@@ -469,6 +458,17 @@ public class ScriptView {
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 SaveCommand.execute(context);
+            }
+        });
+
+        JButton reloadButton = new JButton(getIcon("images/reload.png"));
+        toolBar.add(reloadButton);
+        reloadButton.setToolTipText(Messages.getMessage("action.reload.tooltip"));
+        reloadButton.setBorderPainted(false);
+        reloadButton.setRequestFocusEnabled(false);
+        reloadButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ReloadCommand.execute(context);
             }
         });
 
@@ -503,7 +503,7 @@ public class ScriptView {
             }
         });
         
-        JButton consoleClearButton = new JButton(getIcon("images/clear_console.png"));
+        JButton consoleClearButton = new JButton(getIcon("images/clear.png"));
         toolBar.add(consoleClearButton);
         consoleClearButton.setToolTipText(Messages.getMessage("action.clear_console.tooltip"));
         consoleClearButton.setBorderPainted(false);
