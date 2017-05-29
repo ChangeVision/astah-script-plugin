@@ -66,9 +66,7 @@ public class ScriptView {
     }
 
     public static ScriptView getInstance() {
-        if (instance == null) {
-            instance = new ScriptView();
-        }
+        instance = new ScriptView();
         return instance;
     }
 
@@ -503,6 +501,8 @@ public class ScriptView {
             }
         });
         
+        toolBar.addSeparator();
+        
         JButton consoleClearButton = new JButton(getIcon("images/clear.png"));
         toolBar.add(consoleClearButton);
         consoleClearButton.setToolTipText(Messages.getMessage("action.clear_console.tooltip"));
@@ -526,6 +526,7 @@ public class ScriptView {
                 ConfigDialog configDialog = ConfigDialog.getInstance();
                 configDialog.update();
                 configDialog.setLocationRelativeTo(context.dialog);
+                configDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 configDialog.setVisible(true);
                 if (!configDialog.isSubmitted()) {
                     return;

@@ -13,9 +13,9 @@ public class ConfigManager {
     public static final String FONT_SMALL = "small font";
     public static final String FONT_MEDIUM = "medium font";
     public static final String FONT_LARGE = "large font";
-    public static final int FONT_SMALL_SIZE = 12;
-    public static final int FONT_MEDIUM_SIZE = 16;
-    public static final int FONT_LARGE_SIZE = 20;
+    public static final int FONT_SMALL_SIZE = 14;
+    public static final int FONT_MEDIUM_SIZE = 18;
+    public static final int FONT_LARGE_SIZE = 22;
     private static Map<String, Integer> fontSizeMap;
     
     public static ConfigManager getInstance() {

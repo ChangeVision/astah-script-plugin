@@ -25,7 +25,7 @@ import org.fife.ui.rtextarea.RTextAreaEditorKit;
 public class ScriptTextArea extends RSyntaxTextArea {
     public static final String DEFAULT_LANGUAGE = "ECMAScript";
     private static final int TAB_SIZE = 4;
-    private static final int ROW_NUM = 25;
+    private static final int ROW_NUM = 20;
     
     public ScriptTextArea() {
         initialize();
