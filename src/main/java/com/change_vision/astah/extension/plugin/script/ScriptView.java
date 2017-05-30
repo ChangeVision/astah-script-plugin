@@ -2,6 +2,7 @@ package com.change_vision.astah.extension.plugin.script;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -85,12 +86,12 @@ public class ScriptView {
             parentWindow = window.getParent();
         }
         
-        JDialog dialog = new JDialog(parentWindow, Messages.getMessage("dialog.title"));
+        final JDialog dialog = new JDialog(parentWindow, Messages.getMessage("dialog.title"));
 
         JPanel cp = new JPanel(new BorderLayout());
 
         // Script Text & Output Text
-        JSplitPane mainPane = createMainPanel();
+        final JSplitPane mainPane = createMainPanel();
         cp.add(mainPane, BorderLayout.CENTER);
 
         JMenuBar menuBar = createMenuBar();
@@ -117,10 +118,24 @@ public class ScriptView {
                     }
                 }
                 context.dialog.setVisible(false);
+
+                ConfigManager config = ConfigManager.getInstance();
+                config.setWindowWidth(dialog.getWidth());
+                config.setWindowHeight(dialog.getHeight());
+                config.setWindowDividerLocation(mainPane.getDividerLocation());
+                config.save();
             }
         });
+        int width = ConfigManager.getInstance().getWindowWidth();
+        int height = ConfigManager.getInstance().getWindowHeight();
+        if (width > 0 && height > 0) {
+            dialog.setPreferredSize(new Dimension(width, height));
+        }
         dialog.pack();
-        mainPane.setDividerLocation(0.7);
+        int dividerLocation = ConfigManager.getInstance().getWindowDividerLocation();
+        if (dividerLocation > 0) {
+            mainPane.setDividerLocation(ConfigManager.getInstance().getWindowDividerLocation());
+        }
         dialog.setLocationRelativeTo(parentWindow);
         dialog.setVisible(true);
 
@@ -267,7 +282,7 @@ public class ScriptView {
 
         JMenuItem item;
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.new.label"),
-                getIcon("images/new.png")));
+                getAdjustedMenuIcon("images/new.png")));
         item.setMnemonic(KeyEvent.VK_N);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -277,7 +292,7 @@ public class ScriptView {
         });
 
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.open.label"),
-                getIcon("images/open.png")));
+                getAdjustedMenuIcon("images/open.png")));
         item.setMnemonic(KeyEvent.VK_O);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -287,7 +302,7 @@ public class ScriptView {
         });
 
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.reload.label"),
-                getIcon("images/reload.png")));
+                getAdjustedMenuIcon("images/reload.png")));
         item.setMnemonic(KeyEvent.VK_R);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
         item.addActionListener(new ActionListener() {
@@ -297,7 +312,7 @@ public class ScriptView {
         });
 
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.save.label"),
-                getIcon("images/save.png")));
+                getAdjustedMenuIcon("images/save.png")));
         item.setMnemonic(KeyEvent.VK_S);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -307,7 +322,7 @@ public class ScriptView {
         });
 
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.save_as.label"),
-                getIcon("images/save.png")));
+                getAdjustedMenuIcon("images/save.png")));
         item.setMnemonic(KeyEvent.VK_A);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, shortcutKeyMask
                 | KeyEvent.SHIFT_MASK));
@@ -367,7 +382,7 @@ public class ScriptView {
         JMenu actionMenu = new JMenu(Messages.getMessage("action_menu.label"));
         actionMenu.setMnemonic(KeyEvent.VK_A);
         actionMenu.add(item = new JMenuItem(Messages.getMessage("action.run.label"),
-                getIcon("images/run.png")));
+                getAdjustedMenuIcon("images/run.png")));
         item.setMnemonic(KeyEvent.VK_R);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -379,7 +394,7 @@ public class ScriptView {
         actionMenu.addSeparator();
         
         actionMenu.add(item = new JMenuItem(Messages.getMessage("action.clear_console.label"),
-                getIcon("images/clear.png")));
+                getAdjustedMenuIcon("images/clear.png")));
         item.setMnemonic(KeyEvent.VK_C);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -418,6 +433,21 @@ public class ScriptView {
 
         menuBar.add(helpMenu);
         return menuBar;
+    }
+
+    private ImageIcon getAdjustedMenuIcon(String path) {
+        ImageIcon imageIcon = getIcon(path);
+        if (imageIcon == null) {
+            return imageIcon;
+        }
+        double scale = getUIScale();
+        if (scale <= 1.0) {
+            return imageIcon;
+        }
+        int buttonWidth = (int) Math.ceil(imageIcon.getIconWidth() * scale);
+        int buttonHeight = (int) Math.ceil(imageIcon.getIconHeight() * scale);
+        changeIconScale(imageIcon, buttonWidth, buttonHeight);
+        return imageIcon;
     }
 
     private JToolBar createToolBar() {

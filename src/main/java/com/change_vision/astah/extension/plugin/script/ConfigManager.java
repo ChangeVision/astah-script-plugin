@@ -8,14 +8,17 @@ import java.util.prefs.Preferences;
 public class ConfigManager {
     private static final ConfigManager configManager = new ConfigManager();
     private static Preferences prefs;
+    private static final String KEY_WINDOW_WIDTH = "window_width";
+    private static final String KEY_WINDOW_HEIGHT = "window_height";
+    private static final String KEY_WINDOW_DIVIDER_LOCATION = "window_divider_location";
     private static final String KEY_CONSOLE_CLEAR = "console_clear";
     private static final String KEY_FONT_SIZE = "font_size";
     public static final String FONT_SMALL = "small font";
     public static final String FONT_MEDIUM = "medium font";
     public static final String FONT_LARGE = "large font";
-    public static final int FONT_SMALL_SIZE = 14;
-    public static final int FONT_MEDIUM_SIZE = 18;
-    public static final int FONT_LARGE_SIZE = 22;
+    public static final int FONT_SMALL_SIZE = 16;
+    public static final int FONT_MEDIUM_SIZE = 20;
+    public static final int FONT_LARGE_SIZE = 24;
     private static Map<String, Integer> fontSizeMap;
     
     public static ConfigManager getInstance() {
@@ -37,6 +40,30 @@ public class ConfigManager {
         }catch(BackingStoreException ex){
             ex.printStackTrace();
         }
+    }
+
+    public int getWindowWidth() {
+        return prefs.getInt(KEY_WINDOW_WIDTH, 0);
+    }
+
+    public void setWindowWidth(int width) {
+        prefs.putInt(KEY_WINDOW_WIDTH, width);
+    }
+
+    public int getWindowHeight() {
+        return prefs.getInt(KEY_WINDOW_HEIGHT, 0);
+    }
+
+    public void setWindowHeight(int height) {
+        prefs.putInt(KEY_WINDOW_HEIGHT, height);
+    }
+
+    public int getWindowDividerLocation() {
+        return prefs.getInt(KEY_WINDOW_DIVIDER_LOCATION, 0);
+    }
+
+    public void setWindowDividerLocation(int location) {
+        prefs.putInt(KEY_WINDOW_DIVIDER_LOCATION, location);
     }
 
     public boolean isAutoConsoleClear() {
