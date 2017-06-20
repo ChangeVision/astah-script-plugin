@@ -44,10 +44,12 @@ import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
 import org.fife.ui.rtextarea.RecordableTextAction;
+import org.omg.CosNaming._BindingIteratorImplBase;
 
 import com.change_vision.astah.extension.plugin.script.command.BrowseCommand;
 import com.change_vision.astah.extension.plugin.script.command.ClearOutputCommand;
 import com.change_vision.astah.extension.plugin.script.command.CloseCommand;
+import com.change_vision.astah.extension.plugin.script.command.ConfigCommand;
 import com.change_vision.astah.extension.plugin.script.command.NewCommand;
 import com.change_vision.astah.extension.plugin.script.command.OpenCommand;
 import com.change_vision.astah.extension.plugin.script.command.ReloadCommand;
@@ -220,21 +222,7 @@ public class ScriptView {
         updateFont(rTextScrollPane, font);
     }
     
-    private void changeFontSize(RTextScrollPane scrollPane) {
-        Font font = new JTextField().getFont();
-        RTextArea textArea = scrollPane.getTextArea();
-        if (textArea != null) {
-            font = textArea.getFont();
-        }
-        int newFontSize = ConfigManager.getInstance().getFontSize();
-        if (font.getSize() == newFontSize) {
-            return;
-        }
-        font = new Font(font.getName(), font.getStyle(), newFontSize);
-        updateFont(scrollPane, font);
-    }
-    
-    private void updateFont(RTextScrollPane pane, Font font) {
+    public void updateFont(RTextScrollPane pane, Font font) {
         RTextArea textArea = pane.getTextArea();
         if (textArea != null) {
             textArea.setFont(font);
@@ -431,6 +419,20 @@ public class ScriptView {
             }
         });
 
+        helpMenu.addSeparator();
+        
+        helpMenu.add(item = new JMenuItem(Messages.getMessage("action.config.label"),
+                getAdjustedMenuIcon("images/option.png")));
+        item.setMnemonic(KeyEvent.VK_O);
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, shortcutKeyMask
+                | KeyEvent.SHIFT_MASK));
+        item.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ConfigCommand configCommand = new ConfigCommand(context);
+                configCommand.execute();
+            }
+        });
+
         menuBar.add(helpMenu);
         return menuBar;
     }
@@ -553,15 +555,8 @@ public class ScriptView {
         configButton.setRequestFocusEnabled(false);
         configButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ConfigDialog configDialog = ConfigDialog.getInstance();
-                configDialog.update();
-                configDialog.setLocationRelativeTo(context.dialog);
-                configDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                configDialog.setVisible(true);
-                if (!configDialog.isSubmitted()) {
-                    return;
-                }
-                changeFontSize();
+                ConfigCommand configCommand = new ConfigCommand(context);
+                configCommand.execute();
             }
         });
 
@@ -575,11 +570,6 @@ public class ScriptView {
         return toolBar;
     }
     
-    public void changeFontSize() {
-        changeFontSize(context.scriptScrollPane);
-        context.scriptOutput.changeFontSize();
-    }
-
     private void adjustButtonSize(JToolBar toolBar) {
         double scale = getUIScale();
         if (scale <= 1.0) {
