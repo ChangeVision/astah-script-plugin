@@ -22,7 +22,7 @@ public class ConfigCommand {
     }
     
     public void execute() {
-        ConfigDialog configDialog = ConfigDialog.getInstance();
+        ConfigDialog configDialog = new ConfigDialog(context.dialog);
         configDialog.update();
         configDialog.setLocationRelativeTo(context.dialog);
         configDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

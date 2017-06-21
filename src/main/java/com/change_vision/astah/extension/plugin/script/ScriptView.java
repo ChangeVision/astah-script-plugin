@@ -44,7 +44,6 @@ import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
 import org.fife.ui.rtextarea.RecordableTextAction;
-import org.omg.CosNaming._BindingIteratorImplBase;
 
 import com.change_vision.astah.extension.plugin.script.command.BrowseCommand;
 import com.change_vision.astah.extension.plugin.script.command.ClearOutputCommand;
@@ -344,11 +343,13 @@ public class ScriptView {
         fileMenu.setMnemonic(KeyEvent.VK_E);
 
         RecordableTextAction undoAction = RTextArea.getAction(RTextArea.UNDO_ACTION);
-        editMenu.add(new JMenuItem(undoAction));
-
+        editMenu.add(item = new JMenuItem(undoAction));
+        item.setIcon(getAdjustedMenuIcon("images/undo.png"));
+        
         RecordableTextAction redoAction = RTextArea.getAction(RTextArea.REDO_ACTION);
-        editMenu.add(new JMenuItem(redoAction));
-
+        editMenu.add(item = new JMenuItem(redoAction));
+        item.setIcon(getAdjustedMenuIcon("images/redo.png"));
+        
         editMenu.addSeparator();
 
         RecordableTextAction cutAction = RTextArea.getAction(RTextArea.CUT_ACTION);

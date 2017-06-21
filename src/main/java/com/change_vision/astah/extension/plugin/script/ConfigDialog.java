@@ -29,13 +29,8 @@ public class ConfigDialog extends JDialog implements ActionListener {
     private ButtonGroup fontGroup;
     private boolean result;
     
-    private static final ConfigDialog configDialog = new ConfigDialog();
-    
-    public static ConfigDialog getInstance() {
-        return configDialog;
-    }
-    
-    private ConfigDialog() {
+    public ConfigDialog(JDialog owner) {
+        super(owner);
         setModal(true);
         setLayout(new BorderLayout());
         
