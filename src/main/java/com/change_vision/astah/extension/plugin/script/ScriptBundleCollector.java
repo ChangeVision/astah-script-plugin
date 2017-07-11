@@ -86,7 +86,14 @@ public class ScriptBundleCollector implements BundleTrackerCustomizer {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     configFile.openStream()));
-            String className = reader.readLine();
+
+            String line;
+            while ((line = reader.readLine()) != null
+                    && (line.matches("\\s*#.*") || line.trim().length() == 0)) {
+                // Skip comments
+            }
+            String className = line;
+
             reader.close();
 
             Class<?> cls = bundle.loadClass(className);
