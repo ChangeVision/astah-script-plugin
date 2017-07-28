@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import org.fife.ui.rtextarea.RTextScrollPane;
 import org.osgi.framework.BundleContext;
 
 import com.change_vision.astah.extension.plugin.script.command.ReloadCommand;
@@ -20,6 +21,7 @@ public class ScriptViewContext {
 
     public JDialog dialog;
     public JComboBox scriptKindCombobox;
+    public RTextScrollPane scriptScrollPane;
     public ScriptTextArea scriptTextArea;
     public ScriptOutput scriptOutput;
     public JLabel statusBar;

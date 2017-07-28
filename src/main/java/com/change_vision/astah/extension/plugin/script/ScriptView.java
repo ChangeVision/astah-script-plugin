@@ -2,6 +2,7 @@ package com.change_vision.astah.extension.plugin.script;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -47,6 +48,7 @@ import org.fife.ui.rtextarea.RecordableTextAction;
 import com.change_vision.astah.extension.plugin.script.command.BrowseCommand;
 import com.change_vision.astah.extension.plugin.script.command.ClearOutputCommand;
 import com.change_vision.astah.extension.plugin.script.command.CloseCommand;
+import com.change_vision.astah.extension.plugin.script.command.ConfigCommand;
 import com.change_vision.astah.extension.plugin.script.command.NewCommand;
 import com.change_vision.astah.extension.plugin.script.command.OpenCommand;
 import com.change_vision.astah.extension.plugin.script.command.ReloadCommand;
@@ -66,9 +68,7 @@ public class ScriptView {
     }
 
     public static ScriptView getInstance() {
-        if (instance == null) {
-            instance = new ScriptView();
-        }
+        instance = new ScriptView();
         return instance;
     }
 
@@ -86,12 +86,13 @@ public class ScriptView {
         if (window != null) {
             parentWindow = window.getParent();
         }
-        JDialog dialog = new JDialog(parentWindow, Messages.getMessage("dialog.title"));
+        
+        final JDialog dialog = new JDialog(parentWindow, Messages.getMessage("dialog.title"));
 
         JPanel cp = new JPanel(new BorderLayout());
 
         // Script Text & Output Text
-        JSplitPane mainPane = createMainPanel();
+        final JSplitPane mainPane = createMainPanel();
         cp.add(mainPane, BorderLayout.CENTER);
 
         JMenuBar menuBar = createMenuBar();
@@ -118,9 +119,24 @@ public class ScriptView {
                     }
                 }
                 context.dialog.setVisible(false);
+
+                ConfigManager config = ConfigManager.getInstance();
+                config.setWindowWidth(dialog.getWidth());
+                config.setWindowHeight(dialog.getHeight());
+                config.setWindowDividerLocation(mainPane.getDividerLocation());
+                config.save();
             }
         });
+        int width = ConfigManager.getInstance().getWindowWidth();
+        int height = ConfigManager.getInstance().getWindowHeight();
+        if (width > 0 && height > 0) {
+            dialog.setPreferredSize(new Dimension(width, height));
+        }
         dialog.pack();
+        int dividerLocation = ConfigManager.getInstance().getWindowDividerLocation();
+        if (dividerLocation > 0) {
+            mainPane.setDividerLocation(ConfigManager.getInstance().getWindowDividerLocation());
+        }
         dialog.setLocationRelativeTo(parentWindow);
         dialog.setVisible(true);
 
@@ -137,6 +153,7 @@ public class ScriptView {
     private JSplitPane createMainPanel() {
         // Script Text
         RTextScrollPane scriptPane = createScriptEditorTextArea();
+        context.scriptScrollPane = scriptPane;
 
         // Output Text
         context.scriptOutput = new ScriptOutput();
@@ -200,11 +217,16 @@ public class ScriptView {
 
     private void adjustFontSizeForHighResDisplay(RTextScrollPane rTextScrollPane) {
         Font font = new JTextField().getFont();
-        RTextArea textArea = rTextScrollPane.getTextArea();
+        font = new Font(font.getName(), font.getStyle(), ConfigManager.getInstance().getFontSize());
+        updateFont(rTextScrollPane, font);
+    }
+    
+    public void updateFont(RTextScrollPane pane, Font font) {
+        RTextArea textArea = pane.getTextArea();
         if (textArea != null) {
             textArea.setFont(font);
         }
-        Gutter gutter = rTextScrollPane.getGutter();
+        Gutter gutter = pane.getGutter();
         if (gutter == null) {
             return;
         }
@@ -247,7 +269,7 @@ public class ScriptView {
 
         JMenuItem item;
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.new.label"),
-                getIcon("images/new.png")));
+                getAdjustedMenuIcon("images/new.png")));
         item.setMnemonic(KeyEvent.VK_N);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -257,7 +279,7 @@ public class ScriptView {
         });
 
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.open.label"),
-                getIcon("images/open.png")));
+                getAdjustedMenuIcon("images/open.png")));
         item.setMnemonic(KeyEvent.VK_O);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -267,7 +289,7 @@ public class ScriptView {
         });
 
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.reload.label"),
-                getIcon("images/reload.png")));
+                getAdjustedMenuIcon("images/reload.png")));
         item.setMnemonic(KeyEvent.VK_R);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
         item.addActionListener(new ActionListener() {
@@ -277,7 +299,7 @@ public class ScriptView {
         });
 
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.save.label"),
-                getIcon("images/save.png")));
+                getAdjustedMenuIcon("images/save.png")));
         item.setMnemonic(KeyEvent.VK_S);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -287,7 +309,7 @@ public class ScriptView {
         });
 
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.save_as.label"),
-                getIcon("images/saveAs.png")));
+                getAdjustedMenuIcon("images/save.png")));
         item.setMnemonic(KeyEvent.VK_A);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, shortcutKeyMask
                 | KeyEvent.SHIFT_MASK));
@@ -299,8 +321,7 @@ public class ScriptView {
 
         fileMenu.addSeparator();
 
-        fileMenu.add(item = new JMenuItem(Messages.getMessage("action.close.label"),
-                getIcon("images/close.png")));
+        fileMenu.add(item = new JMenuItem(Messages.getMessage("action.close.label")));
         item.setMnemonic(KeyEvent.VK_C);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -322,11 +343,13 @@ public class ScriptView {
         fileMenu.setMnemonic(KeyEvent.VK_E);
 
         RecordableTextAction undoAction = RTextArea.getAction(RTextArea.UNDO_ACTION);
-        editMenu.add(new JMenuItem(undoAction));
-
+        editMenu.add(item = new JMenuItem(undoAction));
+        item.setIcon(getAdjustedMenuIcon("images/undo.png"));
+        
         RecordableTextAction redoAction = RTextArea.getAction(RTextArea.REDO_ACTION);
-        editMenu.add(new JMenuItem(redoAction));
-
+        editMenu.add(item = new JMenuItem(redoAction));
+        item.setIcon(getAdjustedMenuIcon("images/redo.png"));
+        
         editMenu.addSeparator();
 
         RecordableTextAction cutAction = RTextArea.getAction(RTextArea.CUT_ACTION);
@@ -348,7 +371,7 @@ public class ScriptView {
         JMenu actionMenu = new JMenu(Messages.getMessage("action_menu.label"));
         actionMenu.setMnemonic(KeyEvent.VK_A);
         actionMenu.add(item = new JMenuItem(Messages.getMessage("action.run.label"),
-                getIcon("images/run.png")));
+                getAdjustedMenuIcon("images/run.png")));
         item.setMnemonic(KeyEvent.VK_R);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -360,7 +383,7 @@ public class ScriptView {
         actionMenu.addSeparator();
         
         actionMenu.add(item = new JMenuItem(Messages.getMessage("action.clear_console.label"),
-                getIcon("images/clear_console.png")));
+                getAdjustedMenuIcon("images/clear.png")));
         item.setMnemonic(KeyEvent.VK_C);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -373,6 +396,13 @@ public class ScriptView {
 
         JMenu helpMenu = new JMenu(Messages.getMessage("help_menu.label"));
         helpMenu.setMnemonic(KeyEvent.VK_H);
+
+        helpMenu.add(item = new JMenuItem(Messages.getMessage("action.open_sample_script.label")));
+        item.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                BrowseCommand.execute(Messages.getMessage("sample_script_uri"));
+            }
+        });
 
         helpMenu.add(item = new JMenuItem(Messages.getMessage("action.open_api_guide.label")));
         item.setMnemonic(KeyEvent.VK_A);
@@ -390,8 +420,37 @@ public class ScriptView {
             }
         });
 
+        helpMenu.addSeparator();
+        
+        helpMenu.add(item = new JMenuItem(Messages.getMessage("action.config.label"),
+                getAdjustedMenuIcon("images/option.png")));
+        item.setMnemonic(KeyEvent.VK_O);
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, shortcutKeyMask
+                | KeyEvent.SHIFT_MASK));
+        item.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ConfigCommand configCommand = new ConfigCommand(context);
+                configCommand.execute();
+            }
+        });
+
         menuBar.add(helpMenu);
         return menuBar;
+    }
+
+    private ImageIcon getAdjustedMenuIcon(String path) {
+        ImageIcon imageIcon = getIcon(path);
+        if (imageIcon == null) {
+            return imageIcon;
+        }
+        double scale = getUIScale();
+        if (scale <= 1.0) {
+            return imageIcon;
+        }
+        int buttonWidth = (int) Math.ceil(imageIcon.getIconWidth() * scale);
+        int buttonHeight = (int) Math.ceil(imageIcon.getIconHeight() * scale);
+        changeIconScale(imageIcon, buttonWidth, buttonHeight);
+        return imageIcon;
     }
 
     private JToolBar createToolBar() {
@@ -403,6 +462,7 @@ public class ScriptView {
         JButton newButton = new JButton(getIcon("images/new.png"));
         toolBar.add(newButton);
         newButton.setToolTipText(Messages.getMessage("action.new.tooltip"));
+        newButton.setBorderPainted(false);
         newButton.setRequestFocusEnabled(false);
         newButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -413,6 +473,7 @@ public class ScriptView {
         JButton openButton = new JButton(getIcon("images/open.png"));
         toolBar.add(openButton);
         openButton.setToolTipText(Messages.getMessage("action.open.tooltip"));
+        openButton.setBorderPainted(false);
         openButton.setRequestFocusEnabled(false);
         openButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -420,23 +481,25 @@ public class ScriptView {
             }
         });
 
-        JButton reloadButton = new JButton(getIcon("images/reload.png"));
-        toolBar.add(reloadButton);
-        reloadButton.setToolTipText(Messages.getMessage("action.reload.tooltip"));
-        reloadButton.setRequestFocusEnabled(false);
-        reloadButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ReloadCommand.execute(context);
-            }
-        });
-
         JButton saveButton = new JButton(getIcon("images/save.png"));
         toolBar.add(saveButton);
         saveButton.setToolTipText(Messages.getMessage("action.save.tooltip"));
+        saveButton.setBorderPainted(false);
         saveButton.setRequestFocusEnabled(false);
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 SaveCommand.execute(context);
+            }
+        });
+
+        JButton reloadButton = new JButton(getIcon("images/reload.png"));
+        toolBar.add(reloadButton);
+        reloadButton.setToolTipText(Messages.getMessage("action.reload.tooltip"));
+        reloadButton.setBorderPainted(false);
+        reloadButton.setRequestFocusEnabled(false);
+        reloadButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ReloadCommand.execute(context);
             }
         });
 
@@ -445,6 +508,7 @@ public class ScriptView {
         RecordableTextAction undoAction = RTextArea.getAction(RTextArea.UNDO_ACTION);
         JButton undoButton = new JButton(undoAction);
         undoButton.setIcon(getIcon("images/undo.png"));
+        undoButton.setBorderPainted(false);
         undoButton.setHideActionText(true);
         undoButton.setRequestFocusEnabled(false);
         toolBar.add(undoButton);
@@ -452,6 +516,7 @@ public class ScriptView {
         RecordableTextAction redoAction = RTextArea.getAction(RTextArea.REDO_ACTION);
         JButton redoButton = new JButton(redoAction);
         redoButton.setIcon(getIcon("images/redo.png"));
+        redoButton.setBorderPainted(false);
         redoButton.setHideActionText(true);
         redoButton.setRequestFocusEnabled(false);
         toolBar.add(redoButton);
@@ -461,10 +526,38 @@ public class ScriptView {
         JButton runButton = new JButton(getIcon("images/run.png"));
         toolBar.add(runButton);
         runButton.setToolTipText(Messages.getMessage("action.run.tooltip"));
+        runButton.setBorderPainted(false);
         runButton.setRequestFocusEnabled(false);
         runButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 RunCommand.execute(context);
+            }
+        });
+        
+        toolBar.addSeparator();
+        
+        JButton consoleClearButton = new JButton(getIcon("images/clear.png"));
+        toolBar.add(consoleClearButton);
+        consoleClearButton.setToolTipText(Messages.getMessage("action.clear_console.tooltip"));
+        consoleClearButton.setBorderPainted(false);
+        consoleClearButton.setRequestFocusEnabled(false);
+        consoleClearButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ClearOutputCommand.execute(context);
+            }
+        });
+        
+        toolBar.addSeparator();
+        
+        JButton configButton = new JButton(getIcon("images/option.png"));
+        toolBar.add(configButton);
+        configButton.setToolTipText(Messages.getMessage("action.config.label"));
+        configButton.setBorderPainted(false);
+        configButton.setRequestFocusEnabled(false);
+        configButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ConfigCommand configCommand = new ConfigCommand(context);
+                configCommand.execute();
             }
         });
 
@@ -477,7 +570,7 @@ public class ScriptView {
 
         return toolBar;
     }
-
+    
     private void adjustButtonSize(JToolBar toolBar) {
         double scale = getUIScale();
         if (scale <= 1.0) {
