@@ -6,7 +6,7 @@
 		<bundle.namespace>com.change_vision.astah.extension.plugin.script</bundle.namespace>
 		<plugin.install>true</plugin.install>
 		<astah.version>7.2</astah.version>
-		<astah.edition>pro,uml,com</astah.edition>
+		<astah.edition>pro,uml</astah.edition>
 	</properties>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.change_vision.astah.extension.plugin</groupId>
