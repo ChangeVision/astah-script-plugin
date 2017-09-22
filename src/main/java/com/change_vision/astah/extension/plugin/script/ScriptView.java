@@ -593,7 +593,15 @@ public class ScriptView {
         }
     }
 
+    public static boolean isMacOSX() {
+        String osName = System.getProperty("os.name").toLowerCase();
+        return osName.startsWith("mac os x");
+    }
+
     private double getUIScale() {
+        if (isMacOSX()) {
+            return 1.0;
+        }
         final double labelNormalFontSize = 12.0;
         Font font = Font.class.cast(UIManager.get("Label.font"));
         double scale = font.getSize() / labelNormalFontSize;
