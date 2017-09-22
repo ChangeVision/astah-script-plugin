@@ -54,7 +54,7 @@ public class ScriptTextArea extends RSyntaxTextArea {
         IconGroup iconGroup = new IconGroup("script", "images/", "images/", "png");
         RSyntaxTextArea.setIconGroup(iconGroup);
         AutoComplete.installTo(this);
-        if (isMacOSX()) {
+        if (ScriptView.isMacOSX()) {
             addDefaultMacKeybinds();
         }
     }
@@ -124,11 +124,6 @@ public class ScriptTextArea extends RSyntaxTextArea {
                 cutToEndLineAction);
     }
 
-    public static boolean isMacOSX() {
-        String osName = System.getProperty("os.name").toLowerCase();
-        return osName.startsWith("mac os x");
-    }
-    
     /** Emacs like action for Cmd + K  */
     class CutToEndLineAction extends TextAction {
         Action selectionForwardAction;
