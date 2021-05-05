@@ -39,6 +39,7 @@ import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.JTextComponent;
 
 import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextArea;
@@ -190,7 +191,16 @@ public class ScriptView {
     }
 
     private RTextScrollPane createScriptEditorTextArea() {
+        // Avoiding the problem that key input cannot be accepted when using
+        // multiple RTextAreas
+        // https://github.com/bobbylight/RSyntaxTextArea/issues/269
+        JTextComponent.removeKeymap("RTextAreaKeymap");
         ScriptTextArea scriptTextArea = new ScriptTextArea();
+        UIManager.put("RSyntaxTextAreaUI.actionMap", null);
+        UIManager.put("RSyntaxTextAreaUI.inputMap", null);
+        UIManager.put("RTextAreaUI.actionMap", null);
+        UIManager.put("RTextAreaUI.inputMap", null);
+
         scriptTextArea.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void changedUpdate(DocumentEvent e) {
