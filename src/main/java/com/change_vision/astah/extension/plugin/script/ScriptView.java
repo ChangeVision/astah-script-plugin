@@ -57,6 +57,7 @@ import com.change_vision.astah.extension.plugin.script.command.RunCommand;
 import com.change_vision.astah.extension.plugin.script.command.SaveAsCommand;
 import com.change_vision.astah.extension.plugin.script.command.SaveCommand;
 import com.change_vision.astah.extension.plugin.script.util.Messages;
+import com.change_vision.jude.api.inf.AstahAPI;
 import com.change_vision.jude.api.inf.exception.ProjectNotFoundException;
 import com.change_vision.jude.api.inf.ui.IWindow;
 
@@ -410,7 +411,7 @@ public class ScriptView {
         helpMenu.add(item = new JMenuItem(Messages.getMessage("action.open_sample_script.label")));
         item.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                BrowseCommand.execute(Messages.getMessage("sample_script_uri"));
+                BrowseCommand.execute(Messages.getMessage("sample_script_uri", getEditionName()));
             }
         });
 
@@ -418,7 +419,7 @@ public class ScriptView {
         item.setMnemonic(KeyEvent.VK_A);
         item.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                BrowseCommand.execute(Messages.getMessage("api_guide_uri"));
+                BrowseCommand.execute(Messages.getMessage("api_guide_uri", getEditionName()));
             }
         });
 
@@ -426,7 +427,7 @@ public class ScriptView {
         item.setMnemonic(KeyEvent.VK_J);
         item.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                BrowseCommand.execute(Messages.getMessage("api_reference_uri"));
+                BrowseCommand.execute(Messages.getMessage("api_reference_uri", getEditionName()));
             }
         });
 
@@ -631,6 +632,17 @@ public class ScriptView {
             System.err.println("No icon resource: " + path);
             return null;
         }
+    }
+
+    private String getEditionName() {
+        try {
+            String astahEdition = AstahAPI.getAstahAPI().getProjectAccessor().getAstahEdition();
+            if (astahEdition != null) {
+                return astahEdition.toLowerCase();
+            }
+        } catch (ClassNotFoundException e) {
+        }
+        return "professional";
     }
 
 }
