@@ -20,7 +20,7 @@ public class ScriptViewContext {
     public static BundleContext bundleContext;
 
     public JDialog dialog;
-    public JComboBox scriptKindCombobox;
+    public JComboBox<?> scriptKindCombobox;
     public RTextScrollPane scriptScrollPane;
     public ScriptTextArea scriptTextArea;
     public ScriptOutput scriptOutput;
@@ -30,9 +30,18 @@ public class ScriptViewContext {
     public boolean isModified = false;
     public HistoryManager historyManager;
     public FileModificationChecker fileModificationChecker;
-    public ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
+    public ScriptEngineManager scriptEngineManager;
     public String encoding = "UTF-8";
-    
+
+    public ScriptViewContext() {
+        scriptEngineManager = new ScriptEngineManager();
+
+        // If the runtime does not provide ECMAScript, use the bundled one.
+        if (scriptEngineManager.getEngineByName("ECMAScript") == null) {
+            scriptEngineManager = new ScriptEngineManager(getClass().getClassLoader());
+        }
+    }
+
     public void setIsModified(boolean isModified) {
         this.isModified = isModified;
         updateTitleBar();
