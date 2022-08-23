@@ -1,5 +1,6 @@
 package com.change_vision.astah.extension.plugin.script;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
@@ -20,6 +21,8 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.IconGroup;
 import org.fife.ui.rtextarea.RTextAreaEditorKit;
+
+import com.change_vision.astah.extension.plugin.script.util.ViewUtil;
 
 @SuppressWarnings("serial")
 public class ScriptTextArea extends RSyntaxTextArea {
@@ -167,4 +170,12 @@ public class ScriptTextArea extends RSyntaxTextArea {
         return new Dimension(size.width, getRowHeight() * ROW_NUM);
     }
 
+    @Override
+    public void setBackground(Color bg) {
+        if (ViewUtil.isDark() && bg == Color.WHITE) {
+            // ダークモード場合、白色に初期化しない
+            return;
+        }
+        super.setBackground(bg);
+    }
 }
