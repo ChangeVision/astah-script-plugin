@@ -57,6 +57,7 @@ import com.change_vision.astah.extension.plugin.script.command.RunCommand;
 import com.change_vision.astah.extension.plugin.script.command.SaveAsCommand;
 import com.change_vision.astah.extension.plugin.script.command.SaveCommand;
 import com.change_vision.astah.extension.plugin.script.util.Messages;
+import com.change_vision.astah.extension.plugin.script.util.ViewUtil;
 import com.change_vision.jude.api.inf.AstahAPI;
 import com.change_vision.jude.api.inf.exception.ProjectNotFoundException;
 import com.change_vision.jude.api.inf.ui.IWindow;
@@ -625,7 +626,7 @@ public class ScriptView {
     }
 
     private ImageIcon getIcon(String path) {
-        URL url = getClass().getClassLoader().getResource(path);
+        URL url = ViewUtil.getResource(getClass().getClassLoader(), path);
         if (url != null) {
             return new ImageIcon(url);
         } else {
