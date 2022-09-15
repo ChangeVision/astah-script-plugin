@@ -14,6 +14,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
@@ -41,6 +43,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.JTextComponent;
 
+import org.fife.ui.rsyntaxtextarea.Theme;
 import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
@@ -202,6 +205,14 @@ public class ScriptView {
         UIManager.put("RSyntaxTextAreaUI.inputMap", null);
         UIManager.put("RTextAreaUI.actionMap", null);
         UIManager.put("RTextAreaUI.inputMap", null);
+
+        if (ViewUtil.isDark()) {
+            try (InputStream in = getClass().getResourceAsStream("/dark.xml")) {
+                Theme theme = Theme.load(in);
+                theme.apply(scriptTextArea);
+            } catch (IOException e) {
+            }
+        }
 
         scriptTextArea.getDocument().addDocumentListener(new DocumentListener() {
             @Override
