@@ -12,8 +12,8 @@
    <!--  General editor colors. -->
    <background color="293134"/>
    <caret color="c1cbc2"/>
-   <selection bg="404E51" roundedEdges="false"/>
-   <currentLineHighlight color="2F393C" fade="false"/>
+   <selection bg="00008B" roundedEdges="false"/>
+   <currentLineHighlight color="00008B" fade="false"/>
    <marginLine fg="394448"/>
    <markAllHighlight color="6b8189"/> <!-- TODO: Fix me -->
    <markOccurrencesHighlight color="6b8189" border="false"/>
@@ -55,7 +55,7 @@
       <style token="OPERATOR" fg="E8E2B7"/>
       <style token="PREPROCESSOR" fg="A082BD"/>
       <style token="REGEX" fg="d39745"/>
-      <style token="SEPARATOR" fg="E8E2B7"/>
+      <style token="SEPARATOR" fg="FF0000"/>
       <style token="VARIABLE" fg="ae9fbf" bold="true"/>
       <style token="WHITESPACE" fg="E0E2E4"/>
       
