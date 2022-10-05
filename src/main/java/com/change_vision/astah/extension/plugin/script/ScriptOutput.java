@@ -1,5 +1,7 @@
 package com.change_vision.astah.extension.plugin.script;
 
+import com.change_vision.astah.extension.plugin.script.util.ViewUtil;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -25,7 +27,11 @@ public class ScriptOutput extends JTextPane {
 
     static {
         ERROR_SIMPLE_ATTRIBUTE_SET = new SimpleAttributeSet();
-        StyleConstants.setForeground(ERROR_SIMPLE_ATTRIBUTE_SET, Color.red);
+        Color errorColor = Color.red;
+        if (ViewUtil.isDark()) {
+            errorColor = new Color(255, 64, 64);
+        }
+        StyleConstants.setForeground(ERROR_SIMPLE_ATTRIBUTE_SET, errorColor);
     }
 
     private PrintStream out;
