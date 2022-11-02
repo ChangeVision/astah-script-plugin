@@ -21,7 +21,7 @@ public class ViewUtil {
             return getLookAndFeelManager().getResourceWithThemeAware(classLoader, path);
         } catch (Throwable e) {
         }
-        return null;
+        return classLoader != null ? classLoader.getResource(path) : null;
     }
 
     private static ILookAndFeelManager getLookAndFeelManager()
