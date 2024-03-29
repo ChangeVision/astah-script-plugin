@@ -33,6 +33,16 @@ public class ScriptViewContext {
     public ScriptEngineManager scriptEngineManager;
     public String encoding = "UTF-8";
 
+    static {
+        try {
+            if (System.getProperty("nashorn.args") == null) {
+                System.setProperty("nashorn.args", "--language=es6");
+            }
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ScriptViewContext() {
         scriptEngineManager = new ScriptEngineManager();
 
