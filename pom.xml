@@ -5,13 +5,13 @@
 		<bundle.symbolicName>com.change_vision.astah.extension.plugin.script</bundle.symbolicName>
 		<bundle.namespace>com.change_vision.astah.extension.plugin.script</bundle.namespace>
 		<plugin.install>true</plugin.install>
-		<astah.version>7.2</astah.version>
+        <astah.version>10.0</astah.version>
 		<astah.edition>pro,uml,sys,safety</astah.edition>
 	</properties>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.change_vision.astah.extension.plugin</groupId>
 	<artifactId>script</artifactId>
-    <version>2.1.2</version>
+    <version>2.2.0</version>
 	<packaging>jar</packaging>
 	<name>%bundle.name</name>
 	<description>%bundle.description</description>
