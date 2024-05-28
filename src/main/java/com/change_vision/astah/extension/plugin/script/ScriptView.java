@@ -1,7 +1,6 @@
 package com.change_vision.astah.extension.plugin.script;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -21,7 +20,6 @@ import java.util.List;
 
 import javax.script.ScriptEngineFactory;
 import javax.swing.Box;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -64,6 +62,7 @@ import com.change_vision.astah.extension.plugin.script.util.ViewUtil;
 import com.change_vision.jude.api.inf.AstahAPI;
 import com.change_vision.jude.api.inf.exception.ProjectNotFoundException;
 import com.change_vision.jude.api.inf.ui.IWindow;
+import com.change_vision.jude.api.inf.view.IIconManager;
 
 public class ScriptView {
 
@@ -292,7 +291,7 @@ public class ScriptView {
 
         JMenuItem item;
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.new.label"),
-                getAdjustedMenuIcon("images/new.png")));
+                getIcon("images/new.png")));
         item.setMnemonic(KeyEvent.VK_N);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -302,7 +301,7 @@ public class ScriptView {
         });
 
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.open.label"),
-                getAdjustedMenuIcon("images/open.png")));
+                getIcon("images/open.png")));
         item.setMnemonic(KeyEvent.VK_O);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -312,7 +311,7 @@ public class ScriptView {
         });
 
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.reload.label"),
-                getAdjustedMenuIcon("images/reload.png")));
+                getIcon("images/reload.png")));
         item.setMnemonic(KeyEvent.VK_R);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
         item.addActionListener(new ActionListener() {
@@ -322,7 +321,7 @@ public class ScriptView {
         });
 
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.save.label"),
-                getAdjustedMenuIcon("images/save.png")));
+                getIcon("images/save.png")));
         item.setMnemonic(KeyEvent.VK_S);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -332,7 +331,7 @@ public class ScriptView {
         });
 
         fileMenu.add(item = new JMenuItem(Messages.getMessage("action.save_as.label"),
-                getAdjustedMenuIcon("images/save.png")));
+                getIcon("images/save.png")));
         item.setMnemonic(KeyEvent.VK_A);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, shortcutKeyMask
                 | KeyEvent.SHIFT_MASK));
@@ -367,11 +366,11 @@ public class ScriptView {
 
         RecordableTextAction undoAction = RTextArea.getAction(RTextArea.UNDO_ACTION);
         editMenu.add(item = new JMenuItem(undoAction));
-        item.setIcon(getAdjustedMenuIcon("images/undo.png"));
+        item.setIcon(getIcon("images/undo.png"));
         
         RecordableTextAction redoAction = RTextArea.getAction(RTextArea.REDO_ACTION);
         editMenu.add(item = new JMenuItem(redoAction));
-        item.setIcon(getAdjustedMenuIcon("images/redo.png"));
+        item.setIcon(getIcon("images/redo.png"));
         
         editMenu.addSeparator();
 
@@ -394,7 +393,7 @@ public class ScriptView {
         JMenu actionMenu = new JMenu(Messages.getMessage("action_menu.label"));
         actionMenu.setMnemonic(KeyEvent.VK_A);
         actionMenu.add(item = new JMenuItem(Messages.getMessage("action.run.label"),
-                getAdjustedMenuIcon("images/run.png")));
+                getIcon("images/run.png")));
         item.setMnemonic(KeyEvent.VK_R);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -406,7 +405,7 @@ public class ScriptView {
         actionMenu.addSeparator();
         
         actionMenu.add(item = new JMenuItem(Messages.getMessage("action.clear_console.label"),
-                getAdjustedMenuIcon("images/clear.png")));
+                getIcon("images/clear.png")));
         item.setMnemonic(KeyEvent.VK_C);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, shortcutKeyMask));
         item.addActionListener(new ActionListener() {
@@ -446,7 +445,7 @@ public class ScriptView {
         helpMenu.addSeparator();
         
         helpMenu.add(item = new JMenuItem(Messages.getMessage("action.config.label"),
-                getAdjustedMenuIcon("images/option.png")));
+                getIcon("images/option.png")));
         item.setMnemonic(KeyEvent.VK_O);
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, shortcutKeyMask
                 | KeyEvent.SHIFT_MASK));
@@ -459,21 +458,6 @@ public class ScriptView {
 
         menuBar.add(helpMenu);
         return menuBar;
-    }
-
-    private ImageIcon getAdjustedMenuIcon(String path) {
-        ImageIcon imageIcon = getIcon(path);
-        if (imageIcon == null) {
-            return imageIcon;
-        }
-        double scale = getUIScale();
-        if (scale <= 1.0) {
-            return imageIcon;
-        }
-        int buttonWidth = (int) Math.ceil(imageIcon.getIconWidth() * scale);
-        int buttonHeight = (int) Math.ceil(imageIcon.getIconHeight() * scale);
-        changeIconScale(imageIcon, buttonWidth, buttonHeight);
-        return imageIcon;
     }
 
     private JToolBar createToolBar() {
@@ -589,31 +573,8 @@ public class ScriptView {
         // Script Kind
         context.scriptKindCombobox = createScriptKindCombobox();
         toolBar.add(context.scriptKindCombobox);
-        adjustButtonSize(toolBar);
 
         return toolBar;
-    }
-    
-    private void adjustButtonSize(JToolBar toolBar) {
-        double scale = getUIScale();
-        if (scale <= 1.0) {
-            return;
-        }
-        for (int buttonIndex = 0; buttonIndex < toolBar.getComponentCount(); buttonIndex++) {
-            Component component = toolBar.getComponent(buttonIndex);
-            if (!(component instanceof JButton)) {
-                continue;
-            }
-            JButton button = JButton.class.cast(component);
-            Icon icon = button.getIcon();
-            if (!(icon instanceof ImageIcon)) {
-                continue;
-            }
-            ImageIcon imageIcon = ImageIcon.class.cast(icon);
-            int buttonWidth = (int) Math.ceil(imageIcon.getIconWidth() * scale);
-            int buttonHeight = (int) Math.ceil(imageIcon.getIconHeight() * scale);
-            changeIconScale(imageIcon, buttonWidth, buttonHeight);
-        }
     }
 
     public static boolean isMacOSX() {
@@ -639,11 +600,16 @@ public class ScriptView {
     private ImageIcon getIcon(String path) {
         URL url = ViewUtil.getResource(getClass().getClassLoader(), path);
         if (url != null) {
-            return new ImageIcon(url);
+            try {
+                IIconManager iconManager = AstahAPI.getAstahAPI().getViewManager().getIconManager();
+                return iconManager.createScalableIcon(url);
+            } catch (Exception e) {
+            }
         } else {
             System.err.println("No icon resource: " + path);
             return null;
         }
+        return null;
     }
 
     private String getEditionName() {
