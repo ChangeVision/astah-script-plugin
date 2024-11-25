@@ -114,6 +114,7 @@ public class ScriptView {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (context.isModified) {
+                    context.dialog.setVisible(true);
                     int result = JOptionPane.showConfirmDialog(context.dialog,
                             Messages.getMessage("message.ask_save"));
                     if (result == JOptionPane.YES_OPTION) {
