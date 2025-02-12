@@ -11,7 +11,12 @@ public class CloseCommand {
             int result = JOptionPane.showConfirmDialog(context.dialog,
                     Messages.getMessage("message.ask_save"));
             if (result == JOptionPane.YES_OPTION) {
-                SaveCommand.execute(context);
+                if (SaveCommand.execute(context) == JOptionPane.CANCEL_OPTION) {
+                    return;
+                }
+            }
+            if (result == JOptionPane.CANCEL_OPTION|| result == JOptionPane.CLOSED_OPTION) {
+                return;
             }
         }
 
