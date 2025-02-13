@@ -11,8 +11,10 @@ public class NewCommand {
             int result = JOptionPane.showConfirmDialog(context.dialog,
                     Messages.getMessage("message.ask_save"));
             if (result == JOptionPane.YES_OPTION) {
-                SaveCommand.execute(context);
-            } else if (result == JOptionPane.CANCEL_OPTION) {
+                if (SaveCommand.execute(context) == JOptionPane.CANCEL_OPTION) {
+                    return;
+                }
+            } else if (result == JOptionPane.CANCEL_OPTION || result == JOptionPane.CLOSED_OPTION) {
                 return;
             }
         }
